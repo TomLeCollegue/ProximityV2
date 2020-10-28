@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private Button connectionButton;
 
     public static String uuidUser;
+    public static String emailUser;
 
     private String mailText;
     private String passwordText;
@@ -99,8 +100,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             uuidUser =  response.getString("id");
-                            sessionManager.CreateSession(mailText, passwordText);
-                            SignIn();
+                            sessionManager.Logout();
+                            if(!uuidUser.equals("0")){
+                                sessionManager.CreateSession(mailText, passwordText);
+                                emailUser = mailText;
+                                SignIn();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             mail.setText("Error Json");
