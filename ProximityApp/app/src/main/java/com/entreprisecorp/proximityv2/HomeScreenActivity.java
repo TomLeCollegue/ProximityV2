@@ -31,8 +31,11 @@ import static android.graphics.Bitmap.Config.RGB_565;
 public class HomeScreenActivity extends AppCompatActivity {
 
     private ImageView logout;
+    private ImageView friendsIntent;
     private SessionManager sessionManager;
     private TextView name;
+    private TextView age;
+    private TextView uuid;
     public NetworkHelper netMain;
     private Switch switchNetwork;
     private ImageView profileImage;
@@ -43,14 +46,23 @@ public class HomeScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
 
         name = findViewById(R.id.name);
+        age = findViewById(R.id.age);
+        uuid = findViewById(R.id.uuid);
         logout = findViewById(R.id.enveloppe);
+        friendsIntent = findViewById(R.id.attention);
         switchNetwork = findViewById(R.id.switchnetwork);
         profileImage = findViewById(R.id.profile_image);
         sessionManager = new SessionManager(getApplicationContext());
 
-        netMain = new NetworkHelper(getApplicationContext(), MainActivity.emailUser);
+        netMain = new NetworkHelper(getApplicationContext(), sessionManager.getUserDetail().get("email"));
         name.setText(MainActivity.emailUser);
-        downloadProfileImage(MainActivity.emailUser);
+        downloadProfileImage(sessionManager.getUserDetail().get("email"));
+
+        name.setText(SessionManager.firstname);
+        age.setText(SessionManager.age + " ans");
+        uuid.setText(SessionManager.uuid);
+
+
 
 
 
@@ -58,6 +70,10 @@ public class HomeScreenActivity extends AppCompatActivity {
         logout.setOnClickListener(v -> {
             sessionManager.Logout();
             startActivity(new Intent(HomeScreenActivity.this, MainActivity.class));
+        });
+
+        friendsIntent.setOnClickListener(v -> {
+            startActivity(new Intent(HomeScreenActivity.this, FriendsListActivity.class));
         });
 
         switchNetwork.setOnCheckedChangeListener((buttonView, isChecked) -> {

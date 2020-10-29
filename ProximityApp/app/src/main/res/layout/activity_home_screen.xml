@@ -58,7 +58,7 @@
                 app:srcCompat="@android:drawable/ic_dialog_email" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/attention"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -97,6 +97,20 @@
                     android:gravity="center_horizontal"
                     android:text="Tom"
                     android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="age" />
+
+                <TextView
+                    android:id="@+id/uuid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="uuid" />
 
                 <Switch
                     android:id="@+id/switchnetwork"

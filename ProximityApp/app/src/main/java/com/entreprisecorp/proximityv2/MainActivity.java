@@ -99,11 +99,17 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            uuidUser =  response.getString("id");
+                            uuidUser =  response.getString("uuid");
                             sessionManager.Logout();
+
+                            //-----------if good account---------//
                             if(!uuidUser.equals("0")){
-                                sessionManager.CreateSession(mailText, passwordText);
-                                emailUser = email;
+
+                                SessionManager.age = response.getInt("age");
+                                SessionManager.name = response.getString("name");
+                                SessionManager.firstname = response.getString("firstname");
+                                sessionManager.CreateSession(email, password);
+                                SessionManager.uuid = uuidUser;
                                 SignIn();
                             }
                         } catch (JSONException e) {

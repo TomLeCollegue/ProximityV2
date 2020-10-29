@@ -17,6 +17,14 @@ public class SessionManager {
     public static String EMAIL = "email";
     public static String LOGIN = "login";
 
+    public static int age;
+    public static String uuid;
+    public static String name;
+    public static String firstname;
+
+
+
+
     public SessionManager(Context context){
         this.context = context;
         sharedPreferences = context.getSharedPreferences("LOGIN", 0);
@@ -40,6 +48,11 @@ public class SessionManager {
 
         user.put(PASSWORD, sharedPreferences.getString(PASSWORD,null));
         user.put(EMAIL, sharedPreferences.getString(EMAIL, null));
+        user.put("age", String.valueOf(age));
+        user.put("name", name);
+        user.put("firsname", firstname);
+        user.put("uuid", uuid);
+
         return user;
     }
 
