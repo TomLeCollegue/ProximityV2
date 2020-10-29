@@ -2,10 +2,17 @@ package com.entreprisecorp.proximityv2.nearbyconnection;
 
 import android.Manifest;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.connection.AdvertisingOptions;
 import com.google.android.gms.nearby.connection.ConnectionInfo;
@@ -163,5 +170,4 @@ public class NetworkHelper {
                             });
         }
     }
-
 }

@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 passwordText = password.getText().toString();
-                mailText = mail.getText().toString();
+                mailText = mail.getText().toString().trim();
 
                 Connection(mailText,passwordText);
 
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                             sessionManager.Logout();
                             if(!uuidUser.equals("0")){
                                 sessionManager.CreateSession(mailText, passwordText);
-                                emailUser = mailText;
+                                emailUser = email;
                                 SignIn();
                             }
                         } catch (JSONException e) {
