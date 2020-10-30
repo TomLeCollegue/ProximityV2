@@ -54,7 +54,7 @@ public class FriendsListActivity extends AppCompatActivity implements AdapterPro
             e.printStackTrace();
         }
 
-        String URL = "http://192.168.43.36:8080/RestFullTEST-1.0-SNAPSHOT/Friends/getFriendsByUuid";
+        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/Friends/getFriendsByUuid";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {

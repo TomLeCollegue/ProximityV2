@@ -13,6 +13,9 @@ public class SessionManager {
     public SharedPreferences.Editor editor;
     public Context context;
 
+
+    public static String IPSERVER = "192.168.1.48:8080";
+
     public static String PASSWORD = "password";
     public static String EMAIL = "email";
     public static String LOGIN = "login";

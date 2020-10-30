@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
+        <!-- Telephone Honor -->
         <domain includeSubdomains="true">192.168.43.36</domain>
+        <!-- FreeBox Cap -->
+        <domain includeSubdomains="true">192.168.1.48</domain>
     </domain-config>
 </network-security-config>
