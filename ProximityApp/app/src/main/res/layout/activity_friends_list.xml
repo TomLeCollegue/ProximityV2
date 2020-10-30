@@ -11,6 +11,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/navbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/usericon"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/user"
+                app:tint="#7E7E7E" />
+
+            <ImageView
+                android:id="@+id/messages"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/messages"
+                app:tint="#4C4C4C" />
+
+            <ImageView
+                android:id="@+id/homeicon"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/homepage"
+                app:tint="#7E7E7E" />
+
+            <ImageView
+                android:id="@+id/notificon"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/notification"
+                app:tint="#7E7E7E" />
+
+            <ImageView
+                android:id="@+id/settingicon"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/settings"
+                app:tint="#7E7E7E" />
+        </LinearLayout>
+
         <FrameLayout
             android:id="@+id/top_bar"
             android:layout_width="match_parent"
@@ -32,41 +82,6 @@
                 android:textSize="30dp" />
 
         </FrameLayout>
-
-        <LinearLayout
-            android:id="@+id/navbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_dialog_alert"
-                app:tint="@android:color/secondary_text_dark" />
-
-            <ImageView
-                android:id="@+id/enveloppe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_dialog_email"
-                app:tint="@android:color/secondary_text_dark" />
-
-            <ImageView
-                android:id="@+id/attention"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_dialog_info"
-                app:tint="@android:color/secondary_text_dark" />
-
-        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_friends"

@@ -48,8 +48,8 @@ public class HomeScreenActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         age = findViewById(R.id.age);
         uuid = findViewById(R.id.uuid);
-        logout = findViewById(R.id.enveloppe);
-        friendsIntent = findViewById(R.id.attention);
+        logout = findViewById(R.id.usericon);
+        friendsIntent = findViewById(R.id.messages);
         switchNetwork = findViewById(R.id.switchnetwork);
         profileImage = findViewById(R.id.profile_image);
         sessionManager = new SessionManager(getApplicationContext());

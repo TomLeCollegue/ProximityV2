@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,6 +29,9 @@ public class FriendsListActivity extends AppCompatActivity implements AdapterPro
     private ArrayList<Person> friends = new ArrayList<Person>();
     private RecyclerView rv;
     private AdapterProfilesFriends MyAdapter;
+    private ImageView homeIcon;
+    private ImageView logout;
+    private SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +40,24 @@ public class FriendsListActivity extends AppCompatActivity implements AdapterPro
         GetFriends(SessionManager.uuid);
         Log.d("rv", "Friend done");
         rv = findViewById(R.id.recycler_view_friends);
+        homeIcon= findViewById(R.id.homeicon);
+        logout = findViewById(R.id.usericon);
+        sessionManager = new SessionManager(getApplicationContext());
+
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         MyAdapter = new AdapterProfilesFriends(friends, this);
         rv.setAdapter(MyAdapter);
         MyAdapter.setonItemClickListener(FriendsListActivity.this);
+
+        homeIcon.setOnClickListener(v -> {
+            startActivity(new Intent(FriendsListActivity.this, HomeScreenActivity.class));
+        });
+
+        logout.setOnClickListener(v -> {
+            sessionManager.Logout();
+            startActivity(new Intent(FriendsListActivity.this, MainActivity.class));
+        });
+
 
     }
 

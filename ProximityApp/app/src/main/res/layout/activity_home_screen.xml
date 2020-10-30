@@ -42,29 +42,44 @@
             android:padding="10dp">
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/usericon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:layout_weight="1"
-                app:tint="@android:color/secondary_text_dark"
-                app:srcCompat="@android:drawable/ic_dialog_alert" />
+                app:srcCompat="@drawable/user"
+                app:tint="#7E7E7E" />
 
             <ImageView
-                android:id="@+id/enveloppe"
+                android:id="@+id/messages"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:layout_weight="1"
-                app:tint="@android:color/secondary_text_dark"
-                app:srcCompat="@android:drawable/ic_dialog_email" />
+                app:srcCompat="@drawable/messages"
+                app:tint="#7E7E7E" />
 
             <ImageView
-                android:id="@+id/attention"
+                android:id="@+id/homeicon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_weight="1"
-                app:tint="@android:color/secondary_text_dark"
-                app:srcCompat="@android:drawable/ic_dialog_info" />
+                app:srcCompat="@drawable/homepage"
+                app:tint="#4C4C4C" />
 
+            <ImageView
+                android:id="@+id/notificon"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/notification"
+                app:tint="#7E7E7E" />
+
+            <ImageView
+                android:id="@+id/settingicon"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/settings"
+                app:tint="#7E7E7E" />
         </LinearLayout>
 
         <ScrollView
@@ -85,7 +100,7 @@
                     android:layout_height="200dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="20dp"
-                    android:src="@drawable/tomprofile"
+                    android:src="@drawable/user"
                     app:civ_border_color="@android:color/secondary_text_light"
                     app:civ_border_width="0dp" />
 

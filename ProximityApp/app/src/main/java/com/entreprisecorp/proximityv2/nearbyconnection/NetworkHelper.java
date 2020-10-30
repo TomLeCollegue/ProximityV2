@@ -8,11 +8,15 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.entreprisecorp.proximityv2.Person;
+import com.entreprisecorp.proximityv2.accounts.SessionManager;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.connection.AdvertisingOptions;
 import com.google.android.gms.nearby.connection.ConnectionInfo;
@@ -25,6 +29,10 @@ import com.google.android.gms.nearby.connection.EndpointDiscoveryCallback;
 import com.google.android.gms.nearby.connection.Strategy;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class NetworkHelper {
 
@@ -97,6 +105,7 @@ public class NetworkHelper {
                 @Override
                 public void onEndpointFound(String endpointId, DiscoveredEndpointInfo info) {
                     Log.d(TAG, info.getEndpointName());
+                    newDiscovery(info.getEndpointName());
                 }
                 @Override
                 public void onEndpointLost(String endpointId) {
@@ -169,5 +178,52 @@ public class NetworkHelper {
                                 }
                             });
         }
+    }
+
+
+
+
+    private void newDiscovery(String email){
+        RequestQueue requestQueue = Volley.newRequestQueue(appContext);
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("email", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/nearby/newDiscovery";
+        // Enter the correct url for your api service site
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String name = response.getString("name").trim();
+                            String firstname = response.getString("firstname").trim();
+                            String email = response.getString("email").trim();
+                            int age = response.getInt("age");
+
+                            Person person = new Person(name,firstname,age,email);
+
+                            Log.d("friends", person.toString() );
+                        }
+                        catch (JSONException jsonException) {
+                            jsonException.printStackTrace();
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
     }
 }
