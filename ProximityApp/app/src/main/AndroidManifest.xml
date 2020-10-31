@@ -23,7 +23,7 @@
         <activity android:name=".FriendsListActivity"></activity>
         <activity android:name=".HomeScreenActivity"></activity>
         <activity android:name=".MainActivity"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
