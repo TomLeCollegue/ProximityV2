@@ -5,5 +5,7 @@
         <domain includeSubdomains="true">192.168.43.36</domain>
         <!-- FreeBox Cap -->
         <domain includeSubdomains="true">192.168.1.48</domain>
+        <!-- Tom -->
+        <domain includeSubdomains="true">89.87.13.28</domain>
     </domain-config>
 </network-security-config>
