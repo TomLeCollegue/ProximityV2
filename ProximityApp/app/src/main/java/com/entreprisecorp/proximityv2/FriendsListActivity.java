@@ -86,6 +86,7 @@ public class FriendsListActivity extends AppCompatActivity implements AdapterPro
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        friends.clear();
                         try {
                             JSONArray jsonArray = response.getJSONArray("persons");
                             for (int i = 0; i < jsonArray.length(); i++){

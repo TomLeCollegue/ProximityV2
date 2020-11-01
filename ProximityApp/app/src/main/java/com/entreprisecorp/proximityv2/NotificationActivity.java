@@ -89,6 +89,7 @@ public class NotificationActivity extends AppCompatActivity implements AdapterNo
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        persons.clear();
                         try {
                             JSONArray jsonArray = response.getJSONArray("persons");
                             for (int i = 0; i < jsonArray.length(); i++){
@@ -100,11 +101,8 @@ public class NotificationActivity extends AppCompatActivity implements AdapterNo
                                 int age = object.getInt("age");
 
                                 Person person = new Person(name,firstname,age,email);
+                                persons.add(person);
 
-                                for (int j = 0; j < 20; j++) {
-
-                                    persons.add(person);
-                                }
                                 MyAdapter.notifyDataSetChanged();
                             }
                             Log.d("friends", persons.toString() );
