@@ -32,6 +32,7 @@ public class HomeScreenActivity extends AppCompatActivity {
 
     private ImageView logout;
     private ImageView friendsIntent;
+    private ImageView notifIntent;
     private SessionManager sessionManager;
     private TextView name;
     private TextView age;
@@ -50,6 +51,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         uuid = findViewById(R.id.uuid);
         logout = findViewById(R.id.usericon);
         friendsIntent = findViewById(R.id.messages);
+        notifIntent = findViewById(R.id.notificon);
         switchNetwork = findViewById(R.id.switchnetwork);
         profileImage = findViewById(R.id.profile_image);
         sessionManager = new SessionManager(getApplicationContext());
@@ -74,6 +76,10 @@ public class HomeScreenActivity extends AppCompatActivity {
 
         friendsIntent.setOnClickListener(v -> {
             startActivity(new Intent(HomeScreenActivity.this, FriendsListActivity.class));
+        });
+
+        notifIntent.setOnClickListener(v -> {
+            startActivity(new Intent(HomeScreenActivity.this, NotificationActivity.class));
         });
 
         switchNetwork.setOnCheckedChangeListener((buttonView, isChecked) -> {

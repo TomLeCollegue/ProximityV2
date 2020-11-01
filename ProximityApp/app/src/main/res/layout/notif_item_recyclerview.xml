@@ -23,13 +23,27 @@
                 app:civ_border_color="@android:color/secondary_text_light"
                 app:civ_border_width="0dp" />
 
-            <TextView
-                android:id="@+id/name_notif"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="Tom Kubasik"
-                android:textSize="20dp" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name_notif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Tom Kubasik"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="est à proximité" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

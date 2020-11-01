@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
+import com.entreprisecorp.proximityv2.adapters.AdapterNotifications;
 import com.entreprisecorp.proximityv2.adapters.AdapterProfilesFriends;
 
 import org.json.JSONArray;
@@ -24,53 +25,55 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class FriendsListActivity extends AppCompatActivity implements AdapterProfilesFriends.OnItemClickListener{
+public class NotificationActivity extends AppCompatActivity implements AdapterNotifications.OnItemClickListener {
 
-    private ArrayList<Person> friends = new ArrayList<Person>();
+    private ArrayList<Person> persons = new ArrayList<Person>();
     private RecyclerView rv;
-    private AdapterProfilesFriends MyAdapter;
+    private AdapterNotifications MyAdapter;
     private ImageView homeIcon;
     private ImageView logout;
-    private ImageView notificon;
-
+    private ImageView messages;
     private SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends_list);
+        setContentView(R.layout.activity_notification);
 
-        GetFriends(SessionManager.uuid);
+        GetNotif(SessionManager.uuid);
         Log.d("rv", "Friend done");
         rv = findViewById(R.id.recycler_view_friends);
         homeIcon= findViewById(R.id.homeicon);
         logout = findViewById(R.id.usericon);
-        notificon= findViewById(R.id.notificon);
+        messages = findViewById(R.id.messages);
         sessionManager = new SessionManager(getApplicationContext());
 
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        MyAdapter = new AdapterProfilesFriends(friends, this);
+        MyAdapter = new AdapterNotifications(persons, this);
         rv.setAdapter(MyAdapter);
-        MyAdapter.setonItemClickListener(FriendsListActivity.this);
+        MyAdapter.setonItemClickListener(NotificationActivity.this);
 
         homeIcon.setOnClickListener(v -> {
-            startActivity(new Intent(FriendsListActivity.this, HomeScreenActivity.class));
+            startActivity(new Intent(NotificationActivity.this, HomeScreenActivity.class));
         });
 
         logout.setOnClickListener(v -> {
             sessionManager.Logout();
-            startActivity(new Intent(FriendsListActivity.this, MainActivity.class));
+            startActivity(new Intent(NotificationActivity.this, MainActivity.class));
         });
 
-        notificon.setOnClickListener(v -> {
+        messages.setOnClickListener(v -> {
             sessionManager.Logout();
-            startActivity(new Intent(FriendsListActivity.this, NotificationActivity.class));
+            startActivity(new Intent(NotificationActivity.this, FriendsListActivity.class));
         });
+
+
 
 
     }
 
 
-    public void GetFriends(String uuid) {
+    public void GetNotif(String uuid) {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         JSONObject jsonBody = new JSONObject();
@@ -80,7 +83,7 @@ public class FriendsListActivity extends AppCompatActivity implements AdapterPro
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/Friends/getFriendsByUuid";
+        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/Friends/getDiscoveredByUuid";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {
@@ -97,11 +100,15 @@ public class FriendsListActivity extends AppCompatActivity implements AdapterPro
                                 int age = object.getInt("age");
 
                                 Person person = new Person(name,firstname,age,email);
-                                friends.add(person);
-                                MyAdapter.notifyDataSetChanged();
+
+                                for (int j = 0; j < 20; j++) {
+
+                                    persons.add(person);
                                 }
-                            Log.d("friends", friends.toString() );
+                                MyAdapter.notifyDataSetChanged();
                             }
+                            Log.d("friends", persons.toString() );
+                        }
                         catch (JSONException jsonException) {
                             jsonException.printStackTrace();
                         }
@@ -121,9 +128,8 @@ public class FriendsListActivity extends AppCompatActivity implements AdapterPro
     }
 
     public void onItemClick(int position) {
-        Intent intent = new Intent(FriendsListActivity.this, MainActivity.class);
+        Intent intent = new Intent(NotificationActivity.this, MainActivity.class);
         intent.putExtra("id_profil", position);
         startActivity(intent);
     }
-
 }
