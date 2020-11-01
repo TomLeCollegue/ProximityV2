@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProximityV2">
-        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".DiscoveryActivity"></activity>
+        <activity android:name=".NotificationActivity" />
         <activity android:name=".FriendsListActivity" />
         <activity android:name=".HomeScreenActivity" />
         <activity android:name=".MainActivity">

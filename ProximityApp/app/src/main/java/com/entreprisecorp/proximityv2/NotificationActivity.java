@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class NotificationActivity extends AppCompatActivity implements AdapterNotifications.OnItemClickListener {
 
-    private ArrayList<Person> persons = new ArrayList<Person>();
+    public static ArrayList<Person> persons = new ArrayList<Person>();
     private RecyclerView rv;
     private AdapterNotifications MyAdapter;
     private ImageView homeIcon;
@@ -128,7 +128,7 @@ public class NotificationActivity extends AppCompatActivity implements AdapterNo
     }
 
     public void onItemClick(int position) {
-        Intent intent = new Intent(NotificationActivity.this, MainActivity.class);
+        Intent intent = new Intent(NotificationActivity.this, DiscoveryActivity.class);
         intent.putExtra("id_profil", position);
         startActivity(intent);
     }

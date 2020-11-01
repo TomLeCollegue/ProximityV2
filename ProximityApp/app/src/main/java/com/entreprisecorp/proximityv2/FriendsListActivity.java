@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class FriendsListActivity extends AppCompatActivity implements AdapterProfilesFriends.OnItemClickListener{
 
-    private ArrayList<Person> friends = new ArrayList<Person>();
+    public static ArrayList<Person> friends = new ArrayList<Person>();
     private RecyclerView rv;
     private AdapterProfilesFriends MyAdapter;
     private ImageView homeIcon;
