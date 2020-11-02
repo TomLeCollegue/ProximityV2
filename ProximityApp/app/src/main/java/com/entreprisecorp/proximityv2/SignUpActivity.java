@@ -88,11 +88,11 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String nameText = name.getText().toString();
                 String surnameText = surname.getText().toString();
-                //int ageInt = Integer.parseInt(age.getText().toString());
+                int ageInt = Integer.parseInt(age.getText().toString());
                 String emailText = email.getText().toString();
                 String passwordText = password.getText().toString();
 
-                //signUp(nameText, surnameText, ageInt, emailText, passwordText);
+                signUp(nameText, surnameText, ageInt, emailText, passwordText);
 
                 BitmapDrawable drawable = (BitmapDrawable) profileImage.getDrawable();
                 Bitmap myImageBitmap = new imagesConversion().getBitmapFromDrawable(drawable);
