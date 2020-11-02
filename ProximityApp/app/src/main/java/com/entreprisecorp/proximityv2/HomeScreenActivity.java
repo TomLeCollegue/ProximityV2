@@ -30,7 +30,7 @@ import static android.graphics.Bitmap.Config.RGB_565;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
-    private ImageView logout;
+    private ImageView user;
     private ImageView friendsIntent;
     private ImageView notifIntent;
     private SessionManager sessionManager;
@@ -49,7 +49,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         age = findViewById(R.id.age);
         uuid = findViewById(R.id.uuid);
-        logout = findViewById(R.id.usericon);
+        user = findViewById(R.id.usericon);
         friendsIntent = findViewById(R.id.messages);
         notifIntent = findViewById(R.id.notificon);
         switchNetwork = findViewById(R.id.switchnetwork);
@@ -69,8 +69,7 @@ public class HomeScreenActivity extends AppCompatActivity {
 
 
         //---------Listeners------------------------//
-        logout.setOnClickListener(v -> {
-            sessionManager.Logout();
+        user.setOnClickListener(v -> {
             startActivity(new Intent(HomeScreenActivity.this, PointOfInterressedActivity.class));
         });
 
