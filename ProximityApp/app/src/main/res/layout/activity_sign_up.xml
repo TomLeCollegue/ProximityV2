@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/base_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/textView_creation_compte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:fontFamily="@font/carter_one"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:padding="10dp"
+                    android:text="Créer un nouveau compte"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_height="70dp"
+                        android:layout_width="70dp"
+                        android:id="@+id/profile_image_signup"
+                        app:civ_border_width="0dp"
+                        app:civ_border_color="@android:color/secondary_text_light"
+                        android:src="@drawable/user"
+                        android:layout_margin="20dp"/>
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:id="@+id/name_notif"
+                        android:textSize="20dp"
+                        android:text="Votre photo de profil"
+                        android:gravity="center_vertical"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:ems="10"
+                    android:hint="Nom"
+                    android:inputType="textPersonName"
+                    android:padding="15dp" />
+                <EditText
+                    android:id="@+id/surname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:ems="10"
+                    android:hint="Prénom"
+                    android:inputType="textPersonName"
+                    android:padding="15dp" />
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:ems="10"
+                    android:hint="Adresse Mail"
+                    android:inputType="textEmailAddress"
+                    android:padding="15dp" />
+
+                <EditText
+                    android:id="@+id/age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:ems="10"
+                    android:hint="Âge"
+                    android:inputType="number"
+                    android:padding="15dp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:orientation="vertical"/>
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="Mot de passe"
+                    android:inputType="textPassword"
+                    android:padding="15dp" />
+
+
+                <EditText
+                    android:id="@+id/confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="Confirmer Mot de passe"
+                    android:inputType="textPassword"
+                    android:padding="15dp" />
+
+                <Button
+                    android:id="@+id/buttonsignup"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="15dp"
+                    android:text="Créer un compte"
+                    android:textSize="20dp"
+                    app:backgroundTint="@color/duckBlue" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
