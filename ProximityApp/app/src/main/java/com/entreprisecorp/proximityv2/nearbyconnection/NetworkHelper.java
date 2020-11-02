@@ -43,6 +43,7 @@ public class NetworkHelper {
     private String infoConnection;
     private String emailDiscovered;
     private static String TAG = "nearbyConnection";
+    private SessionManager sessionManager;
 
 
     //---------PERMISSION HANDLER--------------//
@@ -81,6 +82,7 @@ public class NetworkHelper {
         this.appContext = appContext;
         this.connectionsClient = Nearby.getConnectionsClient(appContext);
         this.infoConnection = infoConnection;
+        this.sessionManager = new SessionManager(appContext);
     }
 
     public void StopAll(){
@@ -188,7 +190,8 @@ public class NetworkHelper {
 
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.put("email", email);
+            jsonBody.put("email2", email);
+            jsonBody.put("email1", sessionManager.getUserDetail().get(SessionManager.EMAIL));
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".FriendsListActivity">
+    tools:context=".NotificationActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -31,10 +30,10 @@
             <ImageView
                 android:id="@+id/messages"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/messages"
-                app:tint="#4C4C4C" />
+                android:tint="#7E7E7E"
+                app:srcCompat="@drawable/messages" />
 
             <ImageView
                 android:id="@+id/homeicon"
@@ -47,10 +46,10 @@
             <ImageView
                 android:id="@+id/notificon"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="30dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/notification"
-                app:tint="#7E7E7E" />
+                app:tint="#4C4C4C" />
 
             <ImageView
                 android:id="@+id/settingicon"
@@ -78,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Amis"
+                android:text="Notifications"
                 android:textSize="30dp" />
 
         </FrameLayout>
