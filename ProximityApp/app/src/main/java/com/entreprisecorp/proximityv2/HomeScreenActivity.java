@@ -71,7 +71,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         //---------Listeners------------------------//
         logout.setOnClickListener(v -> {
             sessionManager.Logout();
-            startActivity(new Intent(HomeScreenActivity.this, MainActivity.class));
+            startActivity(new Intent(HomeScreenActivity.this, PointOfInterressedActivity.class));
         });
 
         friendsIntent.setOnClickListener(v -> {
