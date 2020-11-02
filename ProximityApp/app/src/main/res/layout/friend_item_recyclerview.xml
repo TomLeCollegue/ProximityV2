@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="Tom Kubasik"
+                android:text="Votre photo de profil"
                 android:textSize="20dp" />
         </LinearLayout>
 
