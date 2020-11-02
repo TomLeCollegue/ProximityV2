@@ -109,8 +109,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
-
         Log.d("test", jsonBody.toString());
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
