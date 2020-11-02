@@ -24,4 +24,5 @@ public class Hobby {
         this.name = name;
         this.points = points;
     }
+
 }

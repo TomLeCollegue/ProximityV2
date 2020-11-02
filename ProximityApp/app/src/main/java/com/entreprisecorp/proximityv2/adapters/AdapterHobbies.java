@@ -16,7 +16,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
-import com.entreprisecorp.proximityv2.Person;
 import com.entreprisecorp.proximityv2.R;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
 import com.entreprisecorp.proximityv2.hobby.Hobby;
@@ -37,7 +36,7 @@ public class AdapterHobbies extends RecyclerView.Adapter<AdapterHobbies.MyViewHo
     }
 
     public interface OnItemClickListener{
-        void onItemClick(int position);
+        void onItemClickHobby(int position);
     }
     public void setonItemClickListener(AdapterHobbies.OnItemClickListener listener)
     {
@@ -85,7 +84,7 @@ public class AdapterHobbies extends RecyclerView.Adapter<AdapterHobbies.MyViewHo
                     if(Listener != null){
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION){
-                            Listener.onItemClick(position);
+                            Listener.onItemClickHobby(position);
                         }
                     }
                 }
