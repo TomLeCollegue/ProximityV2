@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PointOfInterressedActivity">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/top_bar"
@@ -95,13 +91,29 @@
                 android:layout_margin="15dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/question_title"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Vos questions"
-                    android:textSize="25sp" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/question_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vos questions"
+                        android:textSize="25sp" />
+
+                    <ImageView
+                        android:id="@+id/add_question"
+                        android:contentDescription="ajoute une question"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        app:srcCompat="@android:drawable/ic_menu_add" />
+
+                </RelativeLayout>
 
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -126,6 +138,4 @@
 
             </LinearLayout>
         </ScrollView>
-
-    </FrameLayout>
-</LinearLayout>
+</FrameLayout>
