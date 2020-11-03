@@ -86,14 +86,9 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
             sessionManager.Logout();
             startActivity(new Intent(PointOfInterressedActivity.this, NotificationActivity.class));
         });
-        questions.clear();
-        questions.add(new Question("Quel est le meilleur language de programmation du monde entier ? fait attention a toi BOBO","1","2","3","4","Informatique"));
-        questions.add(new Question("Quel est le meilleur language de programmation du monde entier ? fait attention a toi BOBO","1","2","3","4","Informatique"));
-        questions.add(new Question("Quel est le meilleur language de programmation du monde entier ? fait attention a toi BOBO","1","2","3","4","Informatique"));
-        questions.add(new Question("Quel est le meilleur language de programmation du monde entier ? fait attention a toi BOBO","1","2","3","4","Informatique"));
 
-        MyAdapter.notifyDataSetChanged();
         GetHobbies(SessionManager.uuid);
+        GetQuestion(SessionManager.uuid);
     }
 
     public void onItemClick(int position) {
@@ -152,6 +147,55 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
                             });
 
                             MyAdapterHobbies.notifyDataSetChanged();
+                        } catch (JSONException exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void GetQuestion(String uuid) {
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("uuid", uuid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/GetQuestionByUuid";
+        // Enter the correct url for your api service site
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        questions.clear();
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("questions");
+                            for (int i = 0; i < jsonArray.length(); i++){
+                                JSONObject object = jsonArray.getJSONObject(i);
+
+                                String text = object.getString("text").trim();
+                                String uuidQuestion = object.getString("uuidQuestion").trim();
+                                String choice1 = object.getString("choice1").trim();
+                                String choice2 = object.getString("choice2").trim();
+                                String choice3 = object.getString("choice3").trim();
+                                String answer = object.getString("answer").trim();
+                                String hobby = object.getString("hobby").trim();
+
+                                Question question = new Question(text, choice1, choice2, choice3, answer, hobby, uuidQuestion);
+                                questions.add(question);
+                            }
+
+                            MyAdapter.notifyDataSetChanged();
                         } catch (JSONException exception) {
                             exception.printStackTrace();
                         }

@@ -7,14 +7,16 @@ public class Question {
     private String choice3;
     private String answer;
     private String hobby;
+    private String uuidQuestion;
 
-    public Question(String text, String choice1, String choice2, String choice3, String answer, String hobby) {
+    public Question(String text, String choice1, String choice2, String choice3, String answer, String hobby,String uuidQuestion) {
         this.text = text;
         this.choice1 = choice1;
         this.choice2 = choice2;
         this.choice3 = choice3;
         this.answer = answer;
         this.hobby = hobby;
+        this.uuidQuestion = uuidQuestion;
     }
 
     public String getText() {
@@ -63,5 +65,13 @@ public class Question {
 
     public void setHobby(String hobby) {
         this.hobby = hobby;
+    }
+
+    public String getUuidQuestion() {
+        return uuidQuestion;
+    }
+
+    public void setUuidQuestion(String uuidQuestion) {
+        this.uuidQuestion = uuidQuestion;
     }
 }
