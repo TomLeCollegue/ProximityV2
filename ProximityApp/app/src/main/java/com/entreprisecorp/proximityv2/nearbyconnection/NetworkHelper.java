@@ -203,14 +203,7 @@ public class NetworkHelper {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            String name = response.getString("name").trim();
-                            String firstname = response.getString("firstname").trim();
-                            String email = response.getString("email").trim();
-                            int age = response.getInt("age");
-
-                            Person person = new Person(name,firstname,age,email);
-
-                            Log.d("friends", person.toString() );
+                            String email = response.getString("response");
                         }
                         catch (JSONException jsonException) {
                             jsonException.printStackTrace();

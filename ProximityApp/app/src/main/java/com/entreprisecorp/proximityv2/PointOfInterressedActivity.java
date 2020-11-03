@@ -209,4 +209,5 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
         });
         requestQueue.add(jsonObjectRequest);
     }
+    
 }

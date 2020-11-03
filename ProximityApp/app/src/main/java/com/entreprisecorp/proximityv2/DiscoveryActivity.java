@@ -9,12 +9,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static android.graphics.Bitmap.Config.RGB_565;
 
@@ -30,6 +35,7 @@ public class DiscoveryActivity extends AppCompatActivity {
     private TextView age;
     private TextView firstname;
     private TextView algo;
+    private SessionManager sessionManager;
 
 
     @Override
@@ -43,6 +49,7 @@ public class DiscoveryActivity extends AppCompatActivity {
         age = findViewById(R.id.age);
         firstname = findViewById(R.id.name);
         algo = findViewById(R.id.algo);
+        sessionManager = new SessionManager(getApplicationContext());
 
 
 
@@ -59,7 +66,19 @@ public class DiscoveryActivity extends AppCompatActivity {
         age.setText(personDiscovered.getAge() + " ans");
         firstname.setText(personDiscovered.getFirstname());
 
+        cross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RefuseThePerson();
+            }
+        });
 
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //AcceptThePerson();
+            }
+        });
 
 
 
@@ -90,5 +109,46 @@ public class DiscoveryActivity extends AppCompatActivity {
         );
         requestQueue.add(request);
     }
+
+    private void RefuseThePerson(){
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("email2", personDiscovered.getEmail());
+            jsonBody.put("email1", sessionManager.getUserDetail().get(SessionManager.EMAIL));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/nearby/RefusePerson";
+        // Enter the correct url for your api service site
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String email = response.getString("response");
+                            startActivity(new Intent(DiscoveryActivity.this, NotificationActivity.class));
+                        }
+                        catch (JSONException jsonException) {
+                            jsonException.printStackTrace();
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
+
 
 }
