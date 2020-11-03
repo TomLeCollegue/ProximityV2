@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.android.volley.Request;
@@ -43,9 +46,13 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
     private RecyclerView rv_hobbies;
     private AdapterQuestions MyAdapter;
     private AdapterHobbies MyAdapterHobbies;
+
+
     private ImageView homeIcon;
     private ImageView logout;
     private ImageView notificon;
+
+    private ImageView addQuestion;
 
     private SessionManager sessionManager;
     @Override
@@ -59,6 +66,9 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
         homeIcon= findViewById(R.id.homeicon);
         logout = findViewById(R.id.usericon);
         notificon= findViewById(R.id.notificon);
+
+        addQuestion = findViewById(R.id.add_question);
+
         sessionManager = new SessionManager(getApplicationContext());
 
         rv_questions.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -85,6 +95,15 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
         notificon.setOnClickListener(v -> {
             sessionManager.Logout();
             startActivity(new Intent(PointOfInterressedActivity.this, NotificationActivity.class));
+        });
+
+        addQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                addQuestion.startAnimation(animation);
+                startActivity(new Intent(PointOfInterressedActivity.this, AddQuestionActivity.class));
+            }
         });
 
         GetHobbies(SessionManager.uuid);
