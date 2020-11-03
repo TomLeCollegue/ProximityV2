@@ -62,6 +62,7 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
 
         rv_questions = findViewById(R.id.rv_question);
         rv_hobbies = findViewById(R.id.rv_hobbies);
+        //rv_hobbies.setScrollingTouchSlop(0);
 
         homeIcon= findViewById(R.id.homeicon);
         logout = findViewById(R.id.usericon);
@@ -161,7 +162,7 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
                                 public int compare(Hobby h1, Hobby h2){
                                     if(h1.getPoints() == h2.getPoints())
                                         return 0;
-                                    return h1.getPoints() < h2.getPoints() ? -1 : 1;
+                                    return h1.getPoints() > h2.getPoints() ? -1 : 1;
                                 }
                             });
 
