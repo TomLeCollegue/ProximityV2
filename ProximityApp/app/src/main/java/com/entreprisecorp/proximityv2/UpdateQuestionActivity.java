@@ -38,9 +38,6 @@ public class UpdateQuestionActivity extends AppCompatActivity {
 
     private SessionManager sessionManager;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +77,7 @@ public class UpdateQuestionActivity extends AppCompatActivity {
                 updateQuestion(SessionManager.uuid, updateQuestiontext.getText().toString(), updateChoice1.getText().toString(), updateChoice2.getText().toString(), updateChoice3.getText().toString(), updateAnswer.getText().toString() ,question.getHobby(), question.getUuidQuestion());
             }
         });
-
-
     }
-
 
     public void updateQuestion(String uuid, String questiontext, String choice1, String choice2, String choice3, String answer, String hobby, String uuidQuestion){
         RequestQueue requestQueue =  Volley.newRequestQueue(getApplicationContext());

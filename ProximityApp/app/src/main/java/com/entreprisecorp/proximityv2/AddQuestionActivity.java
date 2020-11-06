@@ -74,7 +74,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         addQuestionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addQuestion(SessionManager.uuid, questionText.getText().toString(), choice1.getText().toString(), choice2.getText().toString(),choice3.getText().toString(), answer.getText().toString(), hobbyTextView.getText().toString());
+                addQuestion(SessionManager.uuid, questionText.getText().toString(), choice1.getText().toString(), choice2.getText().toString(), choice3.getText().toString(), answer.getText().toString(), hobbyTextView.getText().toString());
             }
         });
 
