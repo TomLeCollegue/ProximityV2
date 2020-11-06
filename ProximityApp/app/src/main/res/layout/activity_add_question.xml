@@ -113,7 +113,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:padding="15dp"
-                            android:text="Ajouter une question"
+                            android:text="Valider"
                             android:textSize="20dp"
                             app:backgroundTint="@color/duckBlue"
                             android:layout_alignParentBottom="true"/>

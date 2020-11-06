@@ -81,12 +81,6 @@ public class AddQuestionActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
-    }
-
 
     private void showAlertDialog() {
 
@@ -206,4 +200,10 @@ public class AddQuestionActivity extends AppCompatActivity {
         });
         requestQueue.add(jsonObjectRequest);
         }
+
+        @Override
+        public void onBackPressed() {
+            finish();
+        }
+
     }

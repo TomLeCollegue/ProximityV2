@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imagelogo_updatequestion"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_gravity="center"
-            android:text="Ajout d'une question"
+            android:text="Modifier une question"
             android:textSize="30dp" />
     </FrameLayout>
     <ScrollView
@@ -42,7 +42,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/hobbyText"
+                android:id="@+id/hobbyTextUpdateQuestion"
                 android:textStyle="bold"
                 android:layout_margin="5dp"
                 android:padding="15dp"
@@ -52,7 +52,7 @@
                 android:gravity="center_horizontal" />
 
             <EditText
-                android:id="@+id/question_text"
+                android:id="@+id/question_text_update"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:hint="Texte de votre question"
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:padding="15dp"
-                android:text="Ajouter une question"
+                android:text="Valider"
                 android:textSize="20dp"
                 app:backgroundTint="@color/duckBlue"
                 android:layout_alignParentBottom="true"/>
