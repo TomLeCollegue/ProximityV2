@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -112,8 +113,8 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
     }
 
     public void onItemClick(int position) {
-        Intent intent = new Intent(PointOfInterressedActivity.this, MainActivity.class);
-        intent.putExtra("id_profil", position);
+        Intent intent = new Intent(PointOfInterressedActivity.this, UpdateQuestionActivity.class);
+        intent.putExtra("index_question", position);
         startActivity(intent);
     }
 

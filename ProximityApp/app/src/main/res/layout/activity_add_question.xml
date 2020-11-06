@@ -32,21 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <Button
-                    android:id="@+id/buttonAddQuestion"
-                    style="@style/Widget.AppCompat.Button.Small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:padding="15dp"
-                    android:text="Ajouter une question"
-                    android:textSize="20dp"
-                    app:backgroundTint="@color/duckBlue"
-                    android:layout_alignParentBottom="true"/>
-
                     <LinearLayout
                         android:id="@+id/base_layout"
                         android:layout_width="match_parent"
@@ -118,8 +103,21 @@
                             android:hint="Réponse !"
                             android:inputType="textPersonName"
                             android:padding="15dp" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"/>
+                        <Button
+                            android:id="@+id/buttonAddQuestion"
+                            style="@style/Widget.AppCompat.Button.Small"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:padding="15dp"
+                            android:text="Valider"
+                            android:textSize="20dp"
+                            app:backgroundTint="@color/duckBlue"
+                            android:layout_alignParentBottom="true"/>
                     </LinearLayout>
-            </RelativeLayout>
         </ScrollView>
 </LinearLayout>
 
