@@ -114,7 +114,7 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
 
     public void onItemClick(int position) {
         Intent intent = new Intent(PointOfInterressedActivity.this, UpdateQuestionActivity.class);
-        intent.putExtra("id_profil", position);
+        intent.putExtra("index_question", position);
         startActivity(intent);
     }
 

@@ -27,17 +27,17 @@
         <activity android:name=".AddQuestionActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".PointOfInterressedActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".DiscoveryActivity" />
         <activity android:name=".NotificationActivity" />
         <activity android:name=".FriendsListActivity" />
         <activity android:name=".HomeScreenActivity" />
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data
