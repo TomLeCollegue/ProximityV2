@@ -376,6 +376,37 @@ public class QuizzActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast.makeText(getApplicationContext(), "Question repondues", Toast.LENGTH_SHORT ).show();
+                        AcceptPerson();
+                        finish();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
+
+
+
+    private void AcceptPerson(){
+        RequestQueue requestQueue =  Volley.newRequestQueue(getApplicationContext());
+        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/Friends/AcceptPerson";
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("uuid", SessionManager.uuid);
+            jsonBody.put("emailPerson", personDiscovered.getEmail());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(getApplicationContext(), "Personne acceptée", Toast.LENGTH_SHORT ).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
