@@ -1,9 +1,12 @@
 package com.entreprisecorp.proximityv2;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,13 +22,18 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
-import com.entreprisecorp.proximityv2.hobby.Question;
+import com.entreprisecorp.proximityv2.questions.Question;
+import com.entreprisecorp.proximityv2.questions.QuestionAnswers;
+import com.entreprisecorp.proximityv2.questions.uuidAnswer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static android.graphics.Bitmap.Config.RGB_565;
 
@@ -53,6 +61,13 @@ public class QuizzActivity extends AppCompatActivity {
 
     private int numQuestion;
 
+    private QuestionAnswers questionAnswers;
+
+    private boolean response = false;
+
+    private String[] answers;
+    private boolean answered = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +89,10 @@ public class QuizzActivity extends AppCompatActivity {
         answer4 = findViewById(R.id.answer4);
         nextQuestion = findViewById(R.id.buttonnextQuestion);
 
+        //init answers
+        questionAnswers = new QuestionAnswers();
+        questionAnswers.setUuid(SessionManager.uuid);
+
 
 
         Intent infoIntent = getIntent();
@@ -83,6 +102,7 @@ public class QuizzActivity extends AppCompatActivity {
             int id = (int) bundle.get("id_profil");
             personDiscovered = NotificationActivity.persons.get(id);
         }
+
         quizzName.setText("Quizz de " + personDiscovered.getFirstname());
 
 
@@ -94,6 +114,8 @@ public class QuizzActivity extends AppCompatActivity {
         nextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                questionAnswers.getAnswers().add(new uuidAnswer(questions.get(numQuestion).getUuidQuestion(), response));
+
                 if(numQuestion < (questions.size() -1)){
                     numQuestion ++;
                     DisplayQuestion();
@@ -106,6 +128,25 @@ public class QuizzActivity extends AppCompatActivity {
             }
         });
 
+
+        answer1.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View view) {
+
+                if(!answered){
+                    if (answers[0] == questions.get(numQuestion).getAnswer()) {
+                        answer1.setBackgroundTintList(getResources().getColorStateList(R.color.ColorGreen));
+                    }
+                    else {
+                        answer1.setBackgroundTintList(getResources().getColorStateList(R.color.ColorRed));
+                        ColorInGreenNiceAnswer();
+                    }
+
+                }
+
+            }
+        });
 
     }
 
@@ -199,7 +240,16 @@ public class QuizzActivity extends AppCompatActivity {
 
 
     public void DisplayQuestion(){
+
+        response = false;
         Question question = questions.get(numQuestion);
+
+
+        answers = new String[]{question.getChoice1(), question.getChoice2(), question.getChoice3(), question.getAnswer()};
+        List<String> answerList = Arrays.asList(answers);
+        Collections.shuffle(answerList);
+        answerList.toArray(answers);
+
 
         downloadHobbyImage(question.getHobby());
         hobbyName.setText(question.getHobby());
@@ -207,16 +257,33 @@ public class QuizzActivity extends AppCompatActivity {
         questionNumber.setText("Question " + (numQuestion + 1));
 
         questionText.setText(question.getText());
-        answer1.setText(question.getChoice1());
-        answer2.setText(question.getChoice2());
-        answer3.setText(question.getChoice3());
-        answer4.setText(question.getAnswer());
+        answer1.setText(answers[0]);
+        answer2.setText(answers[1]);
+        answer3.setText(answers[2]);
+        answer4.setText(answers[3]);
 
         if(numQuestion < (questions.size() -1)){
             nextQuestion.setText("Question Suivante");
         }
         else{
             nextQuestion.setText("Fin du Quizz");
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void ColorInGreenNiceAnswer(){
+
+        if (answers[0] == questions.get(numQuestion).getAnswer()) {
+            answer1.setBackgroundTintList(getResources().getColorStateList(R.color.ColorGreen));
+        }
+        else if (answers[1] == questions.get(numQuestion).getAnswer()) {
+            answer2.setBackgroundTintList(getResources().getColorStateList(R.color.ColorGreen));
+        }
+        else if (answers[2] == questions.get(numQuestion).getAnswer()) {
+            answer3.setBackgroundTintList(getResources().getColorStateList(R.color.ColorGreen));
+        }
+        else if (answers[3] == questions.get(numQuestion).getAnswer()) {
+            answer4.setBackgroundTintList(getResources().getColorStateList(R.color.ColorGreen));
         }
     }
 }

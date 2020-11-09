@@ -18,7 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
-import com.entreprisecorp.proximityv2.hobby.Question;
+import com.entreprisecorp.proximityv2.questions.Question;
 
 import org.json.JSONException;
 import org.json.JSONObject;

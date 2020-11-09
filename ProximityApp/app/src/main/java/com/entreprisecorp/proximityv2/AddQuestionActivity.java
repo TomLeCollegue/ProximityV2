@@ -75,6 +75,8 @@ public class AddQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addQuestion(SessionManager.uuid, questionText.getText().toString(), choice1.getText().toString(), choice2.getText().toString(),choice3.getText().toString(), answer.getText().toString(), hobbyTextView.getText().toString());
+                startActivity(new Intent(AddQuestionActivity.this, PointOfInterressedActivity.class));
+                finish();
             }
         });
 
@@ -141,8 +143,6 @@ public class AddQuestionActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                       startActivity(new Intent(AddQuestionActivity.this, PointOfInterressedActivity.class));
-                       finish();
                        Toast.makeText(getApplicationContext(), "Question ajoutée", Toast.LENGTH_SHORT ).show();
                     }
                 }, new Response.ErrorListener() {

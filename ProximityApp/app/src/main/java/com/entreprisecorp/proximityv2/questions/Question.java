@@ -1,4 +1,4 @@
-package com.entreprisecorp.proximityv2.hobby;
+package com.entreprisecorp.proximityv2.questions;
 
 public class Question {
     private String text;

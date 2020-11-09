@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.entreprisecorp.proximityv2.R;
-import com.entreprisecorp.proximityv2.hobby.Question;
+import com.entreprisecorp.proximityv2.questions.Question;
 
 import java.util.ArrayList;
 
