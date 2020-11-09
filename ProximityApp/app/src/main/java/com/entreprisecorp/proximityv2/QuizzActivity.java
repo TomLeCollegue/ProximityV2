@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,6 +26,9 @@ import com.entreprisecorp.proximityv2.accounts.SessionManager;
 import com.entreprisecorp.proximityv2.questions.Question;
 import com.entreprisecorp.proximityv2.questions.QuestionAnswers;
 import com.entreprisecorp.proximityv2.questions.uuidAnswer;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -112,6 +116,7 @@ public class QuizzActivity extends AppCompatActivity {
 
 
         nextQuestion.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
                 questionAnswers.getAnswers().add(new uuidAnswer(questions.get(numQuestion).getUuidQuestion(), response));
@@ -124,6 +129,7 @@ public class QuizzActivity extends AppCompatActivity {
                     startActivity(new Intent(QuizzActivity.this, HomeScreenActivity.class));
 
                     //TODO sendAnswer
+                    SendAnswer();
                 }
             }
         });
@@ -133,16 +139,70 @@ public class QuizzActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
-
                 if(!answered){
+                    answered = true;
                     if (answers[0] == questions.get(numQuestion).getAnswer()) {
                         answer1.setBackgroundTintList(getResources().getColorStateList(R.color.ColorGreen));
+                        response = true;
                     }
                     else {
                         answer1.setBackgroundTintList(getResources().getColorStateList(R.color.ColorRed));
                         ColorInGreenNiceAnswer();
                     }
+                }
 
+            }
+        });
+        answer2.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View view) {
+                if(!answered){
+                    answered = true;
+                    if (answers[1] == questions.get(numQuestion).getAnswer()) {
+                        answer2.setBackgroundTintList(getResources().getColorStateList(R.color.ColorGreen));
+                        response = true;
+                    }
+                    else {
+                        answer2.setBackgroundTintList(getResources().getColorStateList(R.color.ColorRed));
+                        ColorInGreenNiceAnswer();
+                    }
+                }
+
+            }
+        });
+        answer3.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View view) {
+                if(!answered){
+                    answered = true;
+                    if (answers[2] == questions.get(numQuestion).getAnswer()) {
+                        answer3.setBackgroundTintList(getResources().getColorStateList(R.color.ColorGreen));
+                        response = true;
+                    }
+                    else {
+                        answer3.setBackgroundTintList(getResources().getColorStateList(R.color.ColorRed));
+                        ColorInGreenNiceAnswer();
+                    }
+                }
+
+            }
+        });
+        answer4.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View view) {
+                if(!answered){
+                    answered = true;
+                    if (answers[3] == questions.get(numQuestion).getAnswer()) {
+                        answer4.setBackgroundTintList(getResources().getColorStateList(R.color.ColorGreen));
+                        response = true;
+                    }
+                    else {
+                        answer4.setBackgroundTintList(getResources().getColorStateList(R.color.ColorRed));
+                        ColorInGreenNiceAnswer();
+                    }
                 }
 
             }
@@ -165,6 +225,7 @@ public class QuizzActivity extends AppCompatActivity {
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onResponse(JSONObject response) {
                         questions.clear();
@@ -239,10 +300,16 @@ public class QuizzActivity extends AppCompatActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void DisplayQuestion(){
 
         response = false;
+        answered = false;
         Question question = questions.get(numQuestion);
+        answer1.setBackgroundTintList(getResources().getColorStateList(R.color.lightBlue));
+        answer2.setBackgroundTintList(getResources().getColorStateList(R.color.lightBlue));
+        answer3.setBackgroundTintList(getResources().getColorStateList(R.color.lightBlue));
+        answer4.setBackgroundTintList(getResources().getColorStateList(R.color.lightBlue));
 
 
         answers = new String[]{question.getChoice1(), question.getChoice2(), question.getChoice3(), question.getAnswer()};
@@ -285,5 +352,37 @@ public class QuizzActivity extends AppCompatActivity {
         else if (answers[3] == questions.get(numQuestion).getAnswer()) {
             answer4.setBackgroundTintList(getResources().getColorStateList(R.color.ColorGreen));
         }
+    }
+
+    private void SendAnswer() {
+
+        RequestQueue requestQueue =  Volley.newRequestQueue(getApplicationContext());
+        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/answerQuestions";
+
+        Gson gson = new Gson();
+        String jsonObjectString = gson.toJson(questionAnswers);
+        Log.d("debug", jsonObjectString);
+
+        JSONObject jsonObject = new  JSONObject();
+        try{
+            jsonObject = new JSONObject(jsonObjectString);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(getApplicationContext(), "Question repondues", Toast.LENGTH_SHORT ).show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
     }
 }
