@@ -1,13 +1,21 @@
 package com.entreprisecorp.proximityv2;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +41,7 @@ public class UpdateQuestionActivity extends AppCompatActivity {
     private EditText updateChoice3;
     private EditText updateAnswer;
     private Button updateQuestionBtn;
+    private ImageView supprQuestionBtn;
 
     private Question question;
 
@@ -65,6 +74,9 @@ public class UpdateQuestionActivity extends AppCompatActivity {
         updateChoice3 = findViewById(R.id.choice3_update);
         updateAnswer = findViewById(R.id.answer_update);
         updateQuestionBtn = findViewById(R.id.buttonUpdateQuestion);
+        supprQuestionBtn  = findViewById(R.id.suppr_question);
+
+
 
         hobbyText.setText(question.getHobby());
         updateQuestiontext.setText(question.getText());
@@ -72,6 +84,18 @@ public class UpdateQuestionActivity extends AppCompatActivity {
         updateChoice2.setText(question.getChoice2());
         updateChoice3.setText(question.getChoice3());
         updateAnswer.setText(question.getAnswer());
+
+        supprQuestionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                supprQuestionBtn.startAnimation(animation);
+                showAlertDialog(question.getUuidQuestion());
+            }
+        });
+
+
+
 
 
         updateQuestionBtn.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +107,66 @@ public class UpdateQuestionActivity extends AppCompatActivity {
 
 
     }
+
+    public void deleteQuestion(String uuidQuestion){
+        RequestQueue requestQueue =  Volley.newRequestQueue(getApplicationContext());
+        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/removeQuestion";
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("uuidQuestion", uuidQuestion);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.d(TAG, "test avant la requete");
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(getApplicationContext(), "Question supprimée", Toast.LENGTH_SHORT ).show();
+                        finish();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void showAlertDialog(String uuidQuestion) {
+
+        Log.d(TAG, "test");
+
+        AlertDialog.Builder delAlertBuilder = new AlertDialog.Builder(UpdateQuestionActivity.this);
+        delAlertBuilder.setTitle("Voulez-vous vraiment supprimer cette question ?");
+
+
+        delAlertBuilder.setPositiveButton("Confirmer", new
+                DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteQuestion(uuidQuestion);
+                        dialog.dismiss();
+                    }
+                });
+
+        delAlertBuilder.setNeutralButton("Annuler", new
+                DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        AlertDialog dialog = delAlertBuilder.create();
+        dialog.show();
+        Button bn = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        bn.setBackgroundColor(getColor(R.color.DeepRed));
+        bn.setTextColor(Color.WHITE);
+    }
+
 
 
     public void updateQuestion(String uuid, String questiontext, String choice1, String choice2, String choice3, String answer, String hobby, String uuidQuestion){
