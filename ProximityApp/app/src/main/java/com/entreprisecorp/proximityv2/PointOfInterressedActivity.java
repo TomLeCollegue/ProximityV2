@@ -5,9 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,20 +21,15 @@ import com.entreprisecorp.proximityv2.accounts.SessionManager;
 import com.entreprisecorp.proximityv2.adapters.AdapterHobbies;
 import com.entreprisecorp.proximityv2.adapters.AdapterQuestions;
 import com.entreprisecorp.proximityv2.hobby.Hobby;
-import com.entreprisecorp.proximityv2.hobby.Question;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.entreprisecorp.proximityv2.questions.Question;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Map;
 
 public class PointOfInterressedActivity extends AppCompatActivity implements AdapterQuestions.OnItemClickListener,AdapterHobbies.OnItemClickListener {
 

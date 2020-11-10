@@ -23,11 +23,12 @@
         android:roundIcon="@drawable/logo_proximity_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProximityV2">
-        <activity android:name=".UpdateQuestionActivity"/>
+        <activity android:name=".QuizzActivity">
+        </activity>
+        <activity android:name=".UpdateQuestionActivity" />
         <activity android:name=".AddQuestionActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".PointOfInterressedActivity">
-        </activity>
+        <activity android:name=".PointOfInterressedActivity"></activity>
         <activity android:name=".DiscoveryActivity" />
         <activity android:name=".NotificationActivity" />
         <activity android:name=".FriendsListActivity" />
@@ -43,6 +44,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <service android:name=".nearbyconnection.NetworkService" />
     </application>
 

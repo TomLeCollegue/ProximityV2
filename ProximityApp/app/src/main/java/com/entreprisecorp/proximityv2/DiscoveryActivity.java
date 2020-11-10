@@ -36,6 +36,7 @@ public class DiscoveryActivity extends AppCompatActivity {
     private TextView firstname;
     private TextView algo;
     private SessionManager sessionManager;
+    private int id;
 
 
     @Override
@@ -58,7 +59,7 @@ public class DiscoveryActivity extends AppCompatActivity {
         Bundle bundle = infoIntent.getExtras();
 
         if(bundle != null){
-            int id = (int) bundle.get("id_profil");
+            id = (int) bundle.get("id_profil");
             personDiscovered = NotificationActivity.persons.get(id);
         }
 
@@ -76,7 +77,10 @@ public class DiscoveryActivity extends AppCompatActivity {
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //AcceptThePerson();
+                Intent intent = new Intent(DiscoveryActivity.this, QuizzActivity.class);
+                intent.putExtra("id_profil", id);
+                startActivity(intent);
+
             }
         });
 
