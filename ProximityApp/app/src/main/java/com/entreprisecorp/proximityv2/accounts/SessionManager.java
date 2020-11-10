@@ -14,7 +14,7 @@ public class SessionManager {
     public Context context;
 
 
-    public static String IPSERVER = "192.168.1.48:8080";
+    public static String IPSERVER = "89.87.13.28:8080";
 
     public static String PASSWORD = "password";
     public static String EMAIL = "email";

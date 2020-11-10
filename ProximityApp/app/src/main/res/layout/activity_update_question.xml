@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UpdateQuestionActivity">
+
+    <FrameLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imagelogo_updatequestion"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            app:srcCompat="@drawable/logo_proximity_round" />
+
+        <TextView
+            android:id="@+id/title_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:text="Modifier une question"
+            android:textSize="26dp" />
+    </FrameLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:id="@+id/base_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hobbyTextUpdateQuestion"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:padding="15dp"
+                    android:textSize="20dp"
+                    android:text="Votre hobby pour la question"
+                    android:textAlignment="center"
+                    android:gravity="center_horizontal" />
+                <ImageView
+                    android:id="@+id/suppr_question"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/minus"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/question_text_update"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="Texte de votre question"
+                android:inputType="text|textMultiLine"
+                android:layout_margin="5dp"
+                android:ems="10"
+                android:padding="15dp"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="vertical"/>
+            <EditText
+                android:id="@+id/choice1_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:ems="10"
+                android:hint="Choix 1"
+                android:inputType="textPersonName"
+                android:padding="15dp" />
+
+            <EditText
+                android:id="@+id/choice2_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:ems="10"
+                android:hint="Choix 2"
+                android:inputType="textPersonName"
+                android:padding="15dp" />
+
+            <EditText
+                android:id="@+id/choice3_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:ems="10"
+                android:hint="Choix 3"
+                android:inputType="textPersonName"
+                android:padding="15dp" />
+
+            <EditText
+                android:id="@+id/answer_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:ems="10"
+                android:hint="Réponse !"
+                android:inputType="textPersonName"
+                android:padding="15dp" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"/>
+            <Button
+                android:id="@+id/buttonUpdateQuestion"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="15dp"
+                android:text="Valider"
+                android:textSize="20dp"
+                app:backgroundTint="@color/duckBlue"
+                android:layout_alignParentBottom="true"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+

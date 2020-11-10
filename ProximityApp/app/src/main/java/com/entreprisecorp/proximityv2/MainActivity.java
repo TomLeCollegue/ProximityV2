@@ -2,11 +2,14 @@ package com.entreprisecorp.proximityv2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -37,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private HashMap<String,String> userDetails;
 
+    private TextView textSignup;
+
+    // Threshold for minimal keyboard height.
+    //final int MIN_KEYBOARD_HEIGHT_PX = 150;
+    // Top-level window decor view.
+    //final View decorView = MainActivity.getWindow().getDecorView();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         mail = findViewById(R.id.mail);
         password = findViewById(R.id.password);
         connectionButton = findViewById(R.id.buttonconnection);
+        textSignup = findViewById(R.id.textviewSignup);
 
         //----------Connection if already connected-----------------------------//
         if(sessionManager.isLoggin()){
@@ -69,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        textSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SignUp();
+            }
+        });
+
     }
 
     /**
@@ -88,8 +107,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
 
 
         Log.d("test", jsonBody.toString());
@@ -132,6 +149,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private void SignIn() {
         startActivity(new Intent(MainActivity.this, HomeScreenActivity.class));
+    }
+
+    private void SignUp(){
+        startActivity(new Intent(MainActivity.this, SignUpActivity.class));
+        finish();
     }
 
 }

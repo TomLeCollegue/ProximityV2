@@ -11,17 +11,28 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- Optional: only required for FILE payloads -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_proximity_round"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_proximity_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProximityV2">
-        <activity android:name=".FriendsListActivity"></activity>
-        <activity android:name=".HomeScreenActivity"></activity>
+        <activity android:name=".QuizzActivity">
+        </activity>
+        <activity android:name=".UpdateQuestionActivity" />
+        <activity android:name=".AddQuestionActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".PointOfInterressedActivity"></activity>
+        <activity android:name=".DiscoveryActivity" />
+        <activity android:name=".NotificationActivity" />
+        <activity android:name=".FriendsListActivity" />
+        <activity android:name=".HomeScreenActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +44,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <service android:name=".nearbyconnection.NetworkService" />
     </application>
 
 </manifest>

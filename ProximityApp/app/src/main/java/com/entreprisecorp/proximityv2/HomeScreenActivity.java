@@ -25,17 +25,20 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
 import com.entreprisecorp.proximityv2.nearbyconnection.NetworkHelper;
+import com.entreprisecorp.proximityv2.nearbyconnection.NetworkService;
 
 import static android.graphics.Bitmap.Config.RGB_565;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
-    private ImageView logout;
+    private ImageView user;
     private ImageView friendsIntent;
+    private ImageView notifIntent;
     private SessionManager sessionManager;
     private TextView name;
     private TextView age;
     private TextView uuid;
+    private TextView clientCo;
     public NetworkHelper netMain;
     private Switch switchNetwork;
     private ImageView profileImage;
@@ -48,10 +51,12 @@ public class HomeScreenActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         age = findViewById(R.id.age);
         uuid = findViewById(R.id.uuid);
-        logout = findViewById(R.id.usericon);
+        user = findViewById(R.id.usericon);
         friendsIntent = findViewById(R.id.messages);
+        notifIntent = findViewById(R.id.notificon);
         switchNetwork = findViewById(R.id.switchnetwork);
         profileImage = findViewById(R.id.profile_image);
+        clientCo = findViewById(R.id.statesearch);
         sessionManager = new SessionManager(getApplicationContext());
 
         netMain = new NetworkHelper(getApplicationContext(), sessionManager.getUserDetail().get("email"));
@@ -63,27 +68,45 @@ public class HomeScreenActivity extends AppCompatActivity {
         uuid.setText(SessionManager.uuid);
 
 
+        // ****** check if the network is running or not ******** //
+        if(NetworkService.isInstanceCreated()){
+            switchNetwork.setChecked(true);
+            clientCo.setText("• Visible •");
+            clientCo.setTextColor(getResources().getColor(R.color.ColorGreen));
+        }
+        else{
+            clientCo.setText("• Invisible •");
+            clientCo.setTextColor(getResources().getColor(R.color.ColorRed));
+        }
 
-
+        switchNetwork.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked == true){
+                clientCo.setText("• Visible •");
+                clientCo.setTextColor(getResources().getColor(R.color.ColorGreen));
+                // **** Start the service ***** //
+                startService();
+            }
+            else{
+                clientCo.setText("• Invisible •");
+                clientCo.setTextColor(getResources().getColor(R.color.ColorRed));
+                // **** Stop the service ***** //
+                stopService();
+            }
+        });
 
         //---------Listeners------------------------//
-        logout.setOnClickListener(v -> {
-            sessionManager.Logout();
-            startActivity(new Intent(HomeScreenActivity.this, MainActivity.class));
+        user.setOnClickListener(v -> {
+            startActivity(new Intent(HomeScreenActivity.this, PointOfInterressedActivity.class));
         });
 
         friendsIntent.setOnClickListener(v -> {
             startActivity(new Intent(HomeScreenActivity.this, FriendsListActivity.class));
         });
 
-        switchNetwork.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked == true){
-                netMain.SearchPeople();
-            }
-            else{
-                netMain.StopAll();
-            }
+        notifIntent.setOnClickListener(v -> {
+            startActivity(new Intent(HomeScreenActivity.this, NotificationActivity.class));
         });
+
 
 
 
@@ -151,4 +174,16 @@ public class HomeScreenActivity extends AppCompatActivity {
         );
         requestQueue.add(request);
     }
+
+    // ******** START AND STOP netWork Service ******** //
+    public void startService() {
+        Intent serviceIntent = new Intent(this, NetworkService.class);
+        ContextCompat.startForegroundService(this, serviceIntent);
+        NetworkService.homeScreenActivity = this;
+    }
+    public void stopService() {
+        Intent serviceIntent = new Intent(this, NetworkService.class);
+        stopService(serviceIntent);
+    }
+
 }
