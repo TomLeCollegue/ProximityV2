@@ -122,7 +122,7 @@ public class FriendsListActivity extends AppCompatActivity implements AdapterPro
     }
 
     public void onItemClick(int position) {
-        Intent intent = new Intent(FriendsListActivity.this, MainActivity.class);
+        Intent intent = new Intent(FriendsListActivity.this, FriendActivity.class);
         intent.putExtra("id_profil", position);
         startActivity(intent);
     }
