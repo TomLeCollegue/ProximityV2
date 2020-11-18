@@ -10,8 +10,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -24,8 +26,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
+import com.entreprisecorp.proximityv2.imagesManager.imagesConversion;
 import com.entreprisecorp.proximityv2.nearbyconnection.NetworkHelper;
 import com.entreprisecorp.proximityv2.nearbyconnection.NetworkService;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 import static android.graphics.Bitmap.Config.RGB_565;
 
@@ -43,6 +53,13 @@ public class HomeScreenActivity extends AppCompatActivity {
     private Switch switchNetwork;
     private ImageView profileImage;
 
+    private Context mContext;
+
+    private Bitmap profileImageBitmap;
+
+    private String TAG = "test";
+    private String filepath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +76,25 @@ public class HomeScreenActivity extends AppCompatActivity {
         clientCo = findViewById(R.id.statesearch);
         sessionManager = new SessionManager(getApplicationContext());
 
+        mContext = getApplicationContext();
+        filepath = mContext.getExternalFilesDir(null).getAbsolutePath();
+        Log.d(TAG, filepath);
+
+
         netMain = new NetworkHelper(getApplicationContext(), sessionManager.getUserDetail().get("email"));
+
         name.setText(MainActivity.emailUser);
-        downloadProfileImage(sessionManager.getUserDetail().get("email"));
+
+        File file = new File(filepath+"/"+sessionManager.getUserDetail().get("email")+"_pic.jpg");
+
+        if (file.exists()){
+            //displayProfileImage();
+            Log.d(TAG, "it exists");
+        } else {
+            //downloadProfileImage(sessionManager.getUserDetail().get("email"));
+            //displayProfileImage();
+            Log.d(TAG, "it doesnt exists");
+        }
 
         name.setText(SessionManager.firstname);
         age.setText(SessionManager.age + " ans");
@@ -161,8 +194,10 @@ public class HomeScreenActivity extends AppCompatActivity {
         ImageRequest request = new ImageRequest(urlDownload, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
-                profileImage.setImageBitmap(response);
-                profileImage.setVisibility(View.VISIBLE);
+                /*profileImage.setImageBitmap(response);
+                profileImage.setVisibility(View.VISIBLE);*/
+                profileImageBitmap = response;
+
             }
         }, 0, 0, ImageView.ScaleType.CENTER, RGB_565, new Response.ErrorListener() {
             @Override
@@ -174,6 +209,56 @@ public class HomeScreenActivity extends AppCompatActivity {
         );
         requestQueue.add(request);
     }
+
+    private void saveToInternalStorage(BitmapDrawable bitmap_profile){
+        OutputStream outputStream = null;
+
+        Bitmap bitmap = new imagesConversion().getBitmapFromDrawable(bitmap_profile);
+
+        String filepath = mContext.getExternalFilesDir(null).getAbsolutePath();
+        File dir = new File (filepath.replace("/files", "") + "/ProfileImages/");
+
+        dir.mkdir();
+        File file = new File (dir, sessionManager.getUserDetail().get("email")+ "_pic.jpg");
+        try{
+            outputStream = new FileOutputStream(file);
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        new imagesConversion().compressImageToJpeg(bitmap,35,outputStream);
+
+        try {
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            FileOutputStream fos = openFileOutput("profil",Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            // write object to file
+            //oos.writeObject(MainActivity.profil);
+            // closing resources
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getFilePath(){
+        File dir = new File (filepath.replace("/files", "") + "/ProfileImages/");
+
+        dir.mkdir();
+        Log.d(TAG, dir.toString());
+        //File file = new File (dir, sessionManager.getUserDetail().get("email")+ "_pic.jpg");
+        //Log.d(TAG, file.toString());
+    }
+
 
     // ******** START AND STOP netWork Service ******** //
     public void startService() {
