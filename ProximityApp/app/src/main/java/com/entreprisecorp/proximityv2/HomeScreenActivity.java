@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -56,6 +57,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     private Context mContext;
 
     private Bitmap profileImageBitmap;
+    private BitmapDrawable profileImageBitmapDraw;
 
     private String TAG = "test";
     private String filepath;
@@ -77,22 +79,25 @@ public class HomeScreenActivity extends AppCompatActivity {
         sessionManager = new SessionManager(getApplicationContext());
 
         mContext = getApplicationContext();
-        filepath = mContext.getExternalFilesDir(null).getAbsolutePath();
-        Log.d(TAG, filepath);
 
 
         netMain = new NetworkHelper(getApplicationContext(), sessionManager.getUserDetail().get("email"));
 
         name.setText(MainActivity.emailUser);
 
-        File file = new File(filepath+"/"+sessionManager.getUserDetail().get("email")+"_pic.jpg");
+        filepath = mContext.getExternalFilesDir(null).getAbsolutePath();
+        File dir = new File (filepath.replace("/files", "") + "/ProfileImages/");
+        Log.d(TAG, dir.toString());
+        File file = new File (dir, sessionManager.getUserDetail().get("email")+ "_pic.jpg");
 
         if (file.exists()){
-            //displayProfileImage();
+            profileImageBitmapDraw = new BitmapDrawable(Resources.getSystem(), file.toString());
+            displayProfileImage(profileImageBitmapDraw);
             Log.d(TAG, "it exists");
         } else {
-            //downloadProfileImage(sessionManager.getUserDetail().get("email"));
-            //displayProfileImage();
+            dir.mkdir();
+            downloadProfileImage(sessionManager.getUserDetail().get("email"));
+            displayProfileImage(profileImageBitmapDraw);
             Log.d(TAG, "it doesnt exists");
         }
 
@@ -197,6 +202,9 @@ public class HomeScreenActivity extends AppCompatActivity {
                 /*profileImage.setImageBitmap(response);
                 profileImage.setVisibility(View.VISIBLE);*/
                 profileImageBitmap = response;
+                profileImage.setImageBitmap(response);
+                profileImageBitmapDraw = new BitmapDrawable(Resources.getSystem(),profileImageBitmap);
+                saveToInternalStorage(profileImageBitmapDraw);
 
             }
         }, 0, 0, ImageView.ScaleType.CENTER, RGB_565, new Response.ErrorListener() {
@@ -217,16 +225,13 @@ public class HomeScreenActivity extends AppCompatActivity {
 
         String filepath = mContext.getExternalFilesDir(null).getAbsolutePath();
         File dir = new File (filepath.replace("/files", "") + "/ProfileImages/");
-
-        dir.mkdir();
         File file = new File (dir, sessionManager.getUserDetail().get("email")+ "_pic.jpg");
         try{
             outputStream = new FileOutputStream(file);
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }
-        new imagesConversion().compressImageToJpeg(bitmap,35,outputStream);
-
+        new imagesConversion().compressImageToJpeg(bitmap,70,outputStream);
         try {
             outputStream.flush();
         } catch (IOException e) {
@@ -250,13 +255,10 @@ public class HomeScreenActivity extends AppCompatActivity {
         }
     }
 
-    public void getFilePath(){
-        File dir = new File (filepath.replace("/files", "") + "/ProfileImages/");
+    public void displayProfileImage(BitmapDrawable profileImageBitmapDraw){
 
-        dir.mkdir();
-        Log.d(TAG, dir.toString());
-        //File file = new File (dir, sessionManager.getUserDetail().get("email")+ "_pic.jpg");
-        //Log.d(TAG, file.toString());
+        profileImage.setImageDrawable(profileImageBitmapDraw);
+
     }
 
 
