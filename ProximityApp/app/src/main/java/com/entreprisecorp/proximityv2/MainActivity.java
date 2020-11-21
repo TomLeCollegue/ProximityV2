@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -20,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,8 +30,8 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mail;
-    private TextView password;
+    private TextInputEditText mail;
+    private TextInputEditText password;
     private Button connectionButton;
 
     public static String uuidUser;
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
      * Intent to homeScreen if logged in
      */
     private void SignIn() {
-        startActivity(new Intent(MainActivity.this, HomeScreenActivity.class));
+        startActivity(new Intent(MainActivity.this, HomeScreenActivityFragments.class));
     }
 
     private void SignUp(){

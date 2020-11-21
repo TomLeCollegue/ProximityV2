@@ -23,8 +23,11 @@
         android:roundIcon="@drawable/logo_proximity_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProximityV2">
-        <activity android:name=".FriendActivity"></activity>
-        <activity android:name=".QuizzActivity"></activity>
+        <activity android:name=".HomeScreenActivityFragments">
+
+        </activity>
+        <activity android:name=".FriendActivity" />
+        <activity android:name=".QuizzActivity" />
         <activity android:name=".UpdateQuestionActivity" />
         <activity android:name=".AddQuestionActivity" />
         <activity android:name=".SignUpActivity" />

@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|top"
                 android:layout_marginTop="10dp"
-                app:srcCompat="@drawable/logo_proximity_round" />
+                app:srcCompat="@drawable/logo_proximity" />
 
             <TextView
                 android:id="@+id/title_proximity"
@@ -39,30 +39,56 @@
                 android:textColor="#656565"
                 android:textSize="40dp" />
 
-            <EditText
-                android:id="@+id/mail"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mailLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:ems="10"
-                android:hint="Adresse mail"
-                android:inputType="textPersonName" />
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginRight="25dp"
+                android:hint="Adresse Email"
+                app:startIconDrawable="@drawable/user_24dp">
 
-            <EditText
-                android:id="@+id/password"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:ems="10"
-                android:hint="Mot de passe"
-                android:inputType="textPassword" />
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="25dp"
+                android:hint="Password"
+                app:startIconDrawable="@drawable/key_24dp"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <Button
                 android:id="@+id/buttonconnection"
                 style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="25dp"
                 android:padding="15dp"
                 android:text="Connexion"
                 android:textSize="20dp"
@@ -81,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="Inscrivez-vous"
-                android:textColor="@color/lightBlue" />
+                android:textColor="@color/duckBlue" />
         </LinearLayout>
     </FrameLayout>
 

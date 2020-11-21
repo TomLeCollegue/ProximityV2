@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
 import com.entreprisecorp.proximityv2.adapters.AdapterProfilesFriends;
 import com.entreprisecorp.proximityv2.adapters.AdapterQuestionResults;
+import com.entreprisecorp.proximityv2.fragments.FriendsListFragment;
 import com.entreprisecorp.proximityv2.questions.Question;
 import com.entreprisecorp.proximityv2.questions.QuestionResult;
 
@@ -56,7 +57,7 @@ public class FriendActivity extends AppCompatActivity {
 
         if(bundle != null){
             id = (int) bundle.get("id_profil");
-            friend = FriendsListActivity.friends.get(id);
+            friend = FriendsListFragment.friends.get(id);
         }
         rv = findViewById(R.id.rv_questionResults);
         nameFriend = findViewById(R.id.person_name);

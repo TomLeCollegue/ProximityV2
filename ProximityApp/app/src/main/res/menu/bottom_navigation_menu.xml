@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuusericon"
+        android:enabled="true"
+        android:icon="@drawable/user"
+        android:title="User" />
+    <item
+        android:id="@+id/menumessageicon"
+        android:enabled="true"
+        android:icon="@drawable/messages"
+        android:title="Messages" />
+    <item
+        android:id="@+id/menuhomeicon"
+        android:enabled="true"
+        android:icon="@drawable/homepage"
+        android:title="Home" />
+    <item
+        android:id="@+id/menunotificon"
+        android:enabled="true"
+        android:icon="@drawable/notification"
+        android:title="notifIcon" />
+    <item
+        android:id="@+id/menusettingsIcon"
+        android:enabled="true"
+        android:icon="@drawable/settings"
+        android:title="settingsIcon" />
+
+
+</menu>
