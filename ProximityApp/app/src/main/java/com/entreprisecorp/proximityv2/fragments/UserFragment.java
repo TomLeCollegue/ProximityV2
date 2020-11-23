@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +58,7 @@ public class UserFragment extends Fragment implements AdapterQuestions.OnItemCli
     private ImageView addQuestion;
 
     private SessionManager sessionManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,6 +70,7 @@ public class UserFragment extends Fragment implements AdapterQuestions.OnItemCli
         rv_hobbies = view.findViewById(R.id.rv_hobbies);
 
         addQuestion = view.findViewById(R.id.add_question);
+        swipeRefreshLayout = view.findViewById(R.id.swiperefreshuser);
 
         sessionManager = new SessionManager(getContext());
 
@@ -91,6 +94,20 @@ public class UserFragment extends Fragment implements AdapterQuestions.OnItemCli
                 startActivity(new Intent(getContext(), AddQuestionActivity.class));
             }
         });
+
+        swipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+
+                        GetHobbies(SessionManager.uuid);
+                        GetQuestion(SessionManager.uuid);
+                        swipeRefreshLayout.setRefreshing(false);
+
+                    }
+                }
+        );
+
 
         GetHobbies(SessionManager.uuid);
         GetQuestion(SessionManager.uuid);
