@@ -1,12 +1,16 @@
-package com.entreprisecorp.proximityv2;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.entreprisecorp.proximityv2.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.android.volley.Request;
@@ -15,6 +19,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.entreprisecorp.proximityv2.FriendActivity;
+import com.entreprisecorp.proximityv2.FriendsListActivity;
+import com.entreprisecorp.proximityv2.HomeScreenActivity;
+import com.entreprisecorp.proximityv2.MainActivity;
+import com.entreprisecorp.proximityv2.NotificationActivity;
+import com.entreprisecorp.proximityv2.Person;
+import com.entreprisecorp.proximityv2.R;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
 import com.entreprisecorp.proximityv2.adapters.AdapterProfilesFriends;
 
@@ -24,54 +35,41 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class FriendsListActivity extends AppCompatActivity implements AdapterProfilesFriends.OnItemClickListener{
 
+public class FriendsListFragment extends Fragment implements AdapterProfilesFriends.OnItemClickListener{
+
+    View view;
     public static ArrayList<Person> friends = new ArrayList<Person>();
     private RecyclerView rv;
     private AdapterProfilesFriends MyAdapter;
-    private ImageView homeIcon;
-    private ImageView logout;
-    private ImageView notificon;
+
 
     private SessionManager sessionManager;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_friends_list, container, false);
 
         GetFriends(SessionManager.uuid);
         Log.d("rv", "Friend done");
-        rv = findViewById(R.id.recycler_view_friends);
-        homeIcon= findViewById(R.id.homeicon);
-        logout = findViewById(R.id.usericon);
-        notificon= findViewById(R.id.notificon);
-        sessionManager = new SessionManager(getApplicationContext());
+        rv = view.findViewById(R.id.recycler_view_friends);
+        sessionManager = new SessionManager(getContext());
 
-        rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        MyAdapter = new AdapterProfilesFriends(friends, this);
+        rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        MyAdapter = new AdapterProfilesFriends(friends, getContext());
         rv.setAdapter(MyAdapter);
-        MyAdapter.setonItemClickListener(FriendsListActivity.this);
-
-        homeIcon.setOnClickListener(v -> {
-            startActivity(new Intent(FriendsListActivity.this, HomeScreenActivity.class));
-        });
-
-        logout.setOnClickListener(v -> {
-            sessionManager.Logout();
-            startActivity(new Intent(FriendsListActivity.this, MainActivity.class));
-        });
-
-        notificon.setOnClickListener(v -> {
-            sessionManager.Logout();
-            startActivity(new Intent(FriendsListActivity.this, NotificationActivity.class));
-        });
+        MyAdapter.setonItemClickListener(FriendsListFragment.this);
 
 
+
+
+        return view;
     }
 
-
     public void GetFriends(String uuid) {
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
         JSONObject jsonBody = new JSONObject();
         try {
@@ -100,9 +98,9 @@ public class FriendsListActivity extends AppCompatActivity implements AdapterPro
                                 Person person = new Person(name,firstname,age,email);
                                 friends.add(person);
                                 MyAdapter.notifyDataSetChanged();
-                                }
-                            Log.d("friends", friends.toString() );
                             }
+                            Log.d("friends", friends.toString() );
+                        }
                         catch (JSONException jsonException) {
                             jsonException.printStackTrace();
                         }
@@ -122,7 +120,7 @@ public class FriendsListActivity extends AppCompatActivity implements AdapterPro
     }
 
     public void onItemClick(int position) {
-        Intent intent = new Intent(FriendsListActivity.this, FriendActivity.class);
+        Intent intent = new Intent(getContext(), FriendActivity.class);
         intent.putExtra("id_profil", position);
         startActivity(intent);
     }

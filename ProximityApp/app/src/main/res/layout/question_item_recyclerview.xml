@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:background="#FDFDFD"
         android:padding="5dp"
-        android:text="Sujet : Informatique" />
+        android:text="Sujet : Informatique"
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/question_sentence"

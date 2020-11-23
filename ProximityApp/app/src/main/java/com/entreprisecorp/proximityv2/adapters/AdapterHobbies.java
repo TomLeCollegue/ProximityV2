@@ -93,7 +93,7 @@ public class AdapterHobbies extends RecyclerView.Adapter<AdapterHobbies.MyViewHo
 
         public void display(Hobby hobby) {
 
-            points.setText("Points : " + hobby.getPoints());
+            points.setText(hobby.getPoints() + " ");
             name.setText(hobby.getName());
             downloadProfileImage(hobby.getName());
 
