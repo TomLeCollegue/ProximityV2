@@ -160,19 +160,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
     /**
      * Intent to homeScreen if logged in
      */
     private void SignIn() {
         startActivity(new Intent(MainActivity.this, HomeScreenActivityFragments.class));
+        finish();
     }
 
     private void SignUp(){
         startActivity(new Intent(MainActivity.this, SignUpActivity.class));
-        finish();
     }
 
 }
