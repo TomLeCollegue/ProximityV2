@@ -99,7 +99,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         AlertDialog.Builder hobbyalertBuilder = new AlertDialog.Builder(AddQuestionActivity.this);
         hobbyalertBuilder.setTitle("Hobby de votre question");
 
-        int checkedItem = 1; // hobby 1
+        int checkedItem = 0; // hobby 0 : informatique
         hobbyalertBuilder.setSingleChoiceItems(hobbiesStringList, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -112,6 +112,7 @@ public class AddQuestionActivity extends AppCompatActivity {
                 DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        hobbyTextView.setText("Informatique");
                     }
                 });
         AlertDialog dialog = hobbyalertBuilder.create();

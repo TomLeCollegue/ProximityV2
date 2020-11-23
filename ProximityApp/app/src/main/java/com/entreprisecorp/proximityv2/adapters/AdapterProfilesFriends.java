@@ -1,7 +1,10 @@
 package com.entreprisecorp.proximityv2.adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +22,14 @@ import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.Person;
 import com.entreprisecorp.proximityv2.R;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
+import com.entreprisecorp.proximityv2.imagesManager.imagesConversion;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import static android.graphics.Bitmap.Config.RGB_565;
@@ -29,6 +39,12 @@ public class AdapterProfilesFriends extends RecyclerView.Adapter<AdapterProfiles
     public ArrayList<Person> friends;
     private OnItemClickListener Listener;
     private Context context;
+    private Bitmap profileImageBitmap;
+    private BitmapDrawable profileImageBitmapDraw;
+    private String filepath;
+
+    private String TAG = "test";
+
 
     public AdapterProfilesFriends(ArrayList<Person> profils, Context context) {
         this.friends = profils;
@@ -92,9 +108,22 @@ public class AdapterProfilesFriends extends RecyclerView.Adapter<AdapterProfiles
         public void display(Person person) {
 
             title.setText(person.getFirstname() + " " + person.getName());
-            downloadProfileImage(person.getEmail());
 
+            filepath = context.getExternalFilesDir(null).getAbsolutePath();
+            File dir = new File (filepath.replace("/files", "") + "/ProfileImages/");
+            Log.d(TAG, dir.toString());
+            File file = new File (dir, person.getEmail()+ "_pic_low.jpg");
 
+            if (file.exists()){
+                profileImageBitmapDraw = new BitmapDrawable(Resources.getSystem(), file.toString());
+                displayProfileImage(profileImageBitmapDraw);
+                Log.d(TAG, "it exists");
+            } else {
+                dir.mkdir();
+                downloadProfileImage(person.getEmail());
+                displayProfileImage(profileImageBitmapDraw);
+                Log.d(TAG, "it doesnt exists");
+            }
         }
 
 
@@ -104,8 +133,13 @@ public class AdapterProfilesFriends extends RecyclerView.Adapter<AdapterProfiles
             ImageRequest request = new ImageRequest(urlDownload, new Response.Listener<Bitmap>() {
                 @Override
                 public void onResponse(Bitmap response) {
+                    /*profilePic.setImageBitmap(response);
+                    profilePic.setVisibility(View.VISIBLE);*/
+                    profileImageBitmap = response;
                     profilePic.setImageBitmap(response);
-                    profilePic.setVisibility(View.VISIBLE);
+                    profileImageBitmapDraw = new BitmapDrawable(Resources.getSystem(),profileImageBitmap);
+                    saveToInternalStorage(profileImageBitmapDraw, email);
+
                 }
             }, 0, 0, ImageView.ScaleType.CENTER, RGB_565, new Response.ErrorListener() {
                 @Override
@@ -116,6 +150,51 @@ public class AdapterProfilesFriends extends RecyclerView.Adapter<AdapterProfiles
             );
             requestQueue.add(request);
         }
+
+        private void saveToInternalStorage(BitmapDrawable bitmap_profile, String email){
+            OutputStream outputStream = null;
+
+            Bitmap bitmap = new imagesConversion().getBitmapFromDrawable(bitmap_profile);
+
+            String filepath = context.getExternalFilesDir(null).getAbsolutePath();
+            File dir = new File (filepath.replace("/files", "") + "/ProfileImages/");
+            File file = new File (dir, email+ "_pic_low.jpg");
+            try{
+                outputStream = new FileOutputStream(file);
+            } catch (FileNotFoundException e){
+                e.printStackTrace();
+            }
+            new imagesConversion().compressImageToJpeg(bitmap,70,outputStream);
+            try {
+                outputStream.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                FileOutputStream fos = context.openFileOutput("profil", Context.MODE_PRIVATE);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                // write object to file
+                //oos.writeObject(MainActivity.profil);
+                // closing resources
+                oos.close();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void displayProfileImage(BitmapDrawable profileImageBitmapDraw){
+
+            profilePic.setImageDrawable(profileImageBitmapDraw);
+
+        }
+
+
     }
 
 }

@@ -1,6 +1,9 @@
 package com.entreprisecorp.proximityv2.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -28,11 +31,18 @@ import com.entreprisecorp.proximityv2.Person;
 import com.entreprisecorp.proximityv2.R;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
 import com.entreprisecorp.proximityv2.adapters.AdapterProfilesFriends;
+import com.entreprisecorp.proximityv2.imagesManager.imagesConversion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 
@@ -61,8 +71,6 @@ public class FriendsListFragment extends Fragment implements AdapterProfilesFrie
         MyAdapter = new AdapterProfilesFriends(friends, getContext());
         rv.setAdapter(MyAdapter);
         MyAdapter.setonItemClickListener(FriendsListFragment.this);
-
-
 
 
         return view;

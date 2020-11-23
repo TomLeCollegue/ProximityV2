@@ -12,23 +12,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/profile_image"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginStart="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginRight="50dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/user"
-                app:civ_border_color="@android:color/secondary_text_light"
-                app:civ_border_width="0dp" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/user" />
 
             <TextView
                 android:id="@+id/name"
@@ -37,7 +31,7 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:text="Tom"
-                android:textSize="40dp" />
+                android:textSize="25dp" />
 
             <TextView
                 android:id="@+id/age"
@@ -45,20 +39,77 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="21 ans"
-                android:textSize="25dp" />
+                android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/algo"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginRight="30dp"
                 android:gravity="center_horizontal"
-                android:text="Vous avez l'informatique et le seignneur des anneaux en commun"
-                android:textSize="20dp" />
+                android:orientation="vertical">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/friendsincommun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/friend1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/carter_one"
+                        android:text="Tom Kubasik"
+                        app:chipIcon="@drawable/user_24dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/friend2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/carter_one"
+                        android:includeFontPadding="false"
+                        android:text="Laurent Cutting"
+                        app:chipIcon="@drawable/user_24dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/friend3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/carter_one"
+                        android:text="+ 10" />
+
+
+                </com.google.android.material.chip.ChipGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/hobbiesincommun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/hobby1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Informatique"
+                        app:chipIcon="@drawable/star" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/hobby2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sport"
+                        app:chipIcon="@drawable/star" />
+
+
+                </com.google.android.material.chip.ChipGroup>
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -3,9 +3,12 @@ package com.entreprisecorp.proximityv2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,10 +25,17 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
 import com.google.android.material.textfield.TextInputEditText;
+import com.entreprisecorp.proximityv2.imagesManager.imagesConversion;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<String,String> userDetails;
 
     private TextView textSignup;
+
+
 
     // Threshold for minimal keyboard height.
     //final int MIN_KEYBOARD_HEIGHT_PX = 150;
@@ -62,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         connectionButton = findViewById(R.id.buttonconnection);
         textSignup = findViewById(R.id.textviewSignup);
+        //---------------------------------------------------------------//
 
         //----------Connection if already connected-----------------------------//
         if(sessionManager.isLoggin()){
@@ -146,16 +159,17 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
+
     /**
      * Intent to homeScreen if logged in
      */
     private void SignIn() {
         startActivity(new Intent(MainActivity.this, HomeScreenActivityFragments.class));
+        finish();
     }
 
     private void SignUp(){
         startActivity(new Intent(MainActivity.this, SignUpActivity.class));
-        finish();
     }
 
 }
