@@ -35,7 +35,7 @@ public class HomeScreenFragment extends Fragment {
     private SessionManager sessionManager;
     private TextView name;
     private TextView age;
-    private TextView uuid;
+
     private TextView clientCo;
     public NetworkHelper netMain;
     private Switch switchNetwork;
@@ -51,7 +51,7 @@ public class HomeScreenFragment extends Fragment {
 
         name = View.findViewById(R.id.name);
         age = View.findViewById(R.id.age);
-        uuid = View.findViewById(R.id.uuid);
+
 
         switchNetwork = View.findViewById(R.id.switchnetwork);
         profileImage = View.findViewById(R.id.profile_image);
@@ -64,7 +64,7 @@ public class HomeScreenFragment extends Fragment {
 
         name.setText(SessionManager.firstname);
         age.setText(SessionManager.age + " ans");
-        uuid.setText(SessionManager.uuid);
+
 
         // ****** check if the network is running or not ******** //
         if(NetworkService.isInstanceCreated()){
@@ -123,10 +123,9 @@ public class HomeScreenFragment extends Fragment {
     public void startService() {
         Intent serviceIntent = new Intent(getContext(), NetworkService.class);
         ContextCompat.startForegroundService(getContext(), serviceIntent);
-        NetworkService.homeScreenActivity = (HomeScreenActivity) getActivity();
     }
     public void stopService() {
         Intent serviceIntent = new Intent(getContext(), NetworkService.class);
-        //stopService(serviceIntent);
+        getActivity().stopService(serviceIntent);
     }
 }

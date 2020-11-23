@@ -44,12 +44,25 @@
             </FrameLayout>
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_question"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                android:scrollbars="none" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/rect_orange"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:scrollbars="none" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/hobbys_title"
@@ -59,12 +72,24 @@
                 android:text="Vos Succès"
                 android:textSize="25sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_hobbies"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:overScrollMode="never"
-                android:scrollbars="none" />
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rect_orange"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_hobbies"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:scrollbars="none" />
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

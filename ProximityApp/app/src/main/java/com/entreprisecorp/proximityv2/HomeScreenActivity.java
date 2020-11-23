@@ -179,7 +179,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     public void startService() {
         Intent serviceIntent = new Intent(this, NetworkService.class);
         ContextCompat.startForegroundService(this, serviceIntent);
-        NetworkService.homeScreenActivity = this;
+
     }
     public void stopService() {
         Intent serviceIntent = new Intent(this, NetworkService.class);

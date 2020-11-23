@@ -23,6 +23,7 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
+import com.entreprisecorp.proximityv2.fragments.NotificationFragments;
 import com.entreprisecorp.proximityv2.questions.Question;
 import com.entreprisecorp.proximityv2.questions.QuestionAnswers;
 import com.entreprisecorp.proximityv2.questions.uuidAnswer;
@@ -104,7 +105,7 @@ public class QuizzActivity extends AppCompatActivity {
 
         if(bundle != null){
             int id = (int) bundle.get("id_profil");
-            personDiscovered = NotificationActivity.persons.get(id);
+            personDiscovered = NotificationFragments.persons.get(id);
         }
 
         quizzName.setText("Quizz de " + personDiscovered.getFirstname());

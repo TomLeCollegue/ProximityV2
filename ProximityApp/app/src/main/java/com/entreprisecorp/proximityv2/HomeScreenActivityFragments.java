@@ -13,22 +13,38 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.entreprisecorp.proximityv2.accounts.SessionManager;
 import com.entreprisecorp.proximityv2.fragments.FriendsListFragment;
 import com.entreprisecorp.proximityv2.fragments.HomeScreenFragment;
+import com.entreprisecorp.proximityv2.fragments.NotificationFragments;
 import com.entreprisecorp.proximityv2.fragments.UserFragment;
 import com.entreprisecorp.proximityv2.nearbyconnection.NetworkHelper;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HomeScreenActivityFragments extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     public NetworkHelper netMain;
 
     private BottomNavigationView bottomNavigationView;
-
+    private TextView nameTab;
+    private BadgeDrawable badgeNotif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +52,16 @@ public class HomeScreenActivityFragments extends AppCompatActivity implements Bo
         setContentView(R.layout.activity_home_screen_fragments);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        nameTab = findViewById(R.id.title_home);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
 
         bottomNavigationView.setSelectedItemId(R.id.menuhomeicon);
+        badgeNotif = bottomNavigationView.getOrCreateBadge(R.id.menunotificon);
+        GetNotif(SessionManager.uuid);
+
+
+
     }
 
 
@@ -97,22 +119,73 @@ public class HomeScreenActivityFragments extends AppCompatActivity implements Bo
         switch (id) {
             case R.id.menuusericon:
                 setFragment(new UserFragment());
+                nameTab.setText("Profil");
                 return true;
             case R.id.menumessageicon:
                 setFragment(new FriendsListFragment());
+                nameTab.setText("Amis");
                 return true;
             case R.id.menuhomeicon:
                 setFragment(new HomeScreenFragment());
+                nameTab.setText("Proximity");
                 return true;
 
             case R.id.menunotificon:
-                setFragment(new HomeScreenFragment());
+                setFragment(new NotificationFragments());
+                nameTab.setText("Notifications");
                 return true;
 
             case R.id.menusettingsIcon:
                 setFragment(new HomeScreenFragment());
+                nameTab.setText("Settings");
                 return true;
         }
         return false;
     }
+
+    public void GetNotif(String uuid) {
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("uuid", uuid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/Friends/getDiscoveredByUuid";
+        // Enter the correct url for your api service site
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("persons");
+                            if(jsonArray.length() > 0){
+                                badgeNotif.setVisible(true);
+                                badgeNotif.setNumber(jsonArray.length());
+                            }
+                            else{
+                                badgeNotif.setVisible(false);
+                            }
+                        }
+                        catch (JSONException jsonException) {
+                            jsonException.printStackTrace();
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
+
+
 }

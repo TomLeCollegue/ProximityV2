@@ -105,9 +105,6 @@ public class UserFragment extends Fragment implements AdapterQuestions.OnItemCli
     }
 
     public void onItemClickHobby(int position) {
-        Intent intent = new Intent(getContext(), FriendsListActivity.class);
-        intent.putExtra("id_profil", position);
-        startActivity(intent);
     }
 
 
