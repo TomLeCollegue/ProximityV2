@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +30,7 @@ import com.entreprisecorp.proximityv2.accounts.SessionManager;
 import com.entreprisecorp.proximityv2.fragments.FriendsListFragment;
 import com.entreprisecorp.proximityv2.fragments.HomeScreenFragment;
 import com.entreprisecorp.proximityv2.fragments.NotificationFragments;
+import com.entreprisecorp.proximityv2.fragments.SettingsFragment;
 import com.entreprisecorp.proximityv2.fragments.UserFragment;
 import com.entreprisecorp.proximityv2.nearbyconnection.NetworkHelper;
 import com.google.android.material.badge.BadgeDrawable;
@@ -37,6 +40,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
 
 public class HomeScreenActivityFragments extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -136,7 +141,7 @@ public class HomeScreenActivityFragments extends AppCompatActivity implements Bo
                 return true;
 
             case R.id.menusettingsIcon:
-                setFragment(new HomeScreenFragment());
+                setFragment(new SettingsFragment());
                 nameTab.setText("Settings");
                 return true;
         }
