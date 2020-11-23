@@ -23,7 +23,7 @@ public class NetworkService extends Service {
 
     private NotificationManagerCompat notificationManager;
     private static NetworkService instance = null;
-    public static HomeScreenActivity homeScreenActivity = null;
+
     public static NetworkHelper networkHelper;
     public SessionManager sessionManager;
     private String emailSession;
@@ -32,9 +32,6 @@ public class NetworkService extends Service {
         return instance != null;
     }
 
-    public static boolean ishomeScreenActivityCreated() {
-        return homeScreenActivity != null;
-    }
 
     @Override
     public void onCreate() {

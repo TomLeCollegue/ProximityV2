@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.entreprisecorp.proximityv2.accounts.SessionManager;
+import com.entreprisecorp.proximityv2.fragments.UserFragment;
 import com.entreprisecorp.proximityv2.questions.Question;
 
 import org.json.JSONException;
@@ -60,7 +61,7 @@ public class UpdateQuestionActivity extends AppCompatActivity {
 
         if(bundle != null){
             int id = (int) bundle.get("index_question");
-            question = PointOfInterressedActivity.questions.get(id);
+            question = UserFragment.questions.get(id);
         }
 
         Log.d(TAG, question.getHobby());

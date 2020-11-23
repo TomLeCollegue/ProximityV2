@@ -99,7 +99,7 @@ public class AdapterProfilesFriends extends RecyclerView.Adapter<AdapterProfiles
 
 
         public void downloadProfileImage(String email){
-            String urlDownload = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/images/" + email + "/download";
+            String urlDownload = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/images/" + email + "/downloadLow";
             RequestQueue requestQueue = Volley.newRequestQueue(context);
             ImageRequest request = new ImageRequest(urlDownload, new Response.Listener<Bitmap>() {
                 @Override
