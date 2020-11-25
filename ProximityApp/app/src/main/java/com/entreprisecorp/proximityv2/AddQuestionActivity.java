@@ -67,10 +67,12 @@ public class AddQuestionActivity extends AppCompatActivity {
         choice3 = findViewById(R.id.choice3);
         answer = findViewById(R.id.answer);
 
+
         hobbyTextView = findViewById(R.id.hobbyText);
 
         addQuestionBtn = findViewById(R.id.buttonAddQuestion);
 
+        hobbyTextView.setText("Informatique");
         addQuestionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +112,6 @@ public class AddQuestionActivity extends AppCompatActivity {
                 DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        hobbyTextView.setText("Informatique");
                     }
                 });
         AlertDialog dialog = hobbyalertBuilder.create();

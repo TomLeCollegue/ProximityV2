@@ -87,6 +87,7 @@ public class UpdateQuestionActivity extends AppCompatActivity {
         updateAnswer.setText(question.getAnswer());
 
         supprQuestionBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
                 Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
@@ -194,8 +195,8 @@ public class UpdateQuestionActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        /*startActivity(new Intent(UpdateQuestionActivity.this, PointOfInterressedActivity.class));
-                        finish();*/
+                        startActivity(new Intent(UpdateQuestionActivity.this, HomeScreenActivityFragments.class));
+                        finish();
                         Toast.makeText(getApplicationContext(), "Question modifiée", Toast.LENGTH_SHORT ).show();
                     }
                 }, new Response.ErrorListener() {
