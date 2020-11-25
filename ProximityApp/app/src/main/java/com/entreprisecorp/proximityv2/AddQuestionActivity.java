@@ -67,16 +67,16 @@ public class AddQuestionActivity extends AppCompatActivity {
         choice3 = findViewById(R.id.choice3);
         answer = findViewById(R.id.answer);
 
+
         hobbyTextView = findViewById(R.id.hobbyText);
 
         addQuestionBtn = findViewById(R.id.buttonAddQuestion);
 
+        hobbyTextView.setText("Informatique");
         addQuestionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addQuestion(SessionManager.uuid, questionText.getText().toString(), choice1.getText().toString(), choice2.getText().toString(),choice3.getText().toString(), answer.getText().toString(), hobbyTextView.getText().toString());
-                startActivity(new Intent(AddQuestionActivity.this, PointOfInterressedActivity.class));
-                finish();
             }
         });
 
@@ -112,7 +112,6 @@ public class AddQuestionActivity extends AppCompatActivity {
                 DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        hobbyTextView.setText("Informatique");
                     }
                 });
         AlertDialog dialog = hobbyalertBuilder.create();
@@ -145,6 +144,8 @@ public class AddQuestionActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                        Toast.makeText(getApplicationContext(), "Question ajoutée", Toast.LENGTH_SHORT ).show();
+                        startActivity(new Intent(AddQuestionActivity.this, HomeScreenActivityFragments.class));
+                        finish();
                     }
                 }, new Response.ErrorListener() {
             @Override

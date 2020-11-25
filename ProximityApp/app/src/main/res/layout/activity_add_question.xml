@@ -51,58 +51,99 @@
                             android:textAlignment="center"
                             android:gravity="center_horizontal" />
 
-                        <EditText
-                            android:id="@+id/question_text"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/question_textLayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:hint="Texte de votre question"
-                            android:inputType="text|textMultiLine"
-                            android:layout_margin="5dp"
-                            android:ems="10"
-                            android:padding="15dp"/>
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:hint="Question">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/question_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
                         <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:orientation="vertical"/>
-                        <EditText
-                            android:id="@+id/choice1"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/choice1Layout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:ems="10"
-                            android:hint="Choix 1"
-                            android:inputType="textPersonName"
-                            android:padding="15dp" />
+                            android:layout_marginStart="25dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:hint="Choix 1">
 
-                        <EditText
-                            android:id="@+id/choice2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:ems="10"
-                            android:hint="Choix 2"
-                            android:inputType="textPersonName"
-                            android:padding="15dp" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/choice1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
 
-                        <EditText
-                            android:id="@+id/choice3"
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/choice2Layout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:ems="10"
-                            android:hint="Choix 3"
-                            android:inputType="textPersonName"
-                            android:padding="15dp" />
+                            android:layout_marginStart="25dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:hint="Choix 2">
 
-                        <EditText
-                            android:id="@+id/answer"
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/choice2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/choice3Layout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:ems="10"
-                            android:hint="Réponse !"
-                            android:inputType="textPersonName"
-                            android:padding="15dp" />
+                            android:layout_marginStart="25dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:hint="Choix 3">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/choice3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/answerLayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginRight="15dp"
+                            android:hint="Reponse"
+                            app:boxStrokeColor="@color/ColorGreen">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/answer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
                         <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="45dp"/>

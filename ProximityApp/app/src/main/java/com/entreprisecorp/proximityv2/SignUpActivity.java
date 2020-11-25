@@ -121,7 +121,6 @@ public class SignUpActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Log.d(TAG, "test avant la requete");
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {
@@ -170,7 +169,7 @@ public class SignUpActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(SignUpActivity.this, "Image envoyée avec succes", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "Inscription réussie", Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
