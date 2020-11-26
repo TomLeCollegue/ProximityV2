@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
@@ -33,6 +34,7 @@ import com.entreprisecorp.proximityv2.fragments.NotificationFragments;
 import com.entreprisecorp.proximityv2.fragments.SettingsFragment;
 import com.entreprisecorp.proximityv2.fragments.UserFragment;
 import com.entreprisecorp.proximityv2.nearbyconnection.NetworkHelper;
+import com.entreprisecorp.proximityv2.questions.Question;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -46,6 +48,7 @@ import java.io.File;
 public class HomeScreenActivityFragments extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     public NetworkHelper netMain;
+    private int numQuestion;
 
     private BottomNavigationView bottomNavigationView;
     private TextView nameTab;
@@ -54,6 +57,11 @@ public class HomeScreenActivityFragments extends AppCompatActivity implements Bo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        GetQuestion(SessionManager.uuid);
+
+
+
         setContentView(R.layout.activity_home_screen_fragments);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -191,6 +199,46 @@ public class HomeScreenActivityFragments extends AppCompatActivity implements Bo
         });
         requestQueue.add(jsonObjectRequest);
     }
+
+
+    public void GetQuestion(String uuid) {
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("uuid", uuid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/GetQuestionByUuid";
+        // Enter the correct url for your api service site
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("questions");
+                            numQuestion = jsonArray.length();
+                            if(numQuestion < 1 ){
+                                startActivity(new Intent(HomeScreenActivityFragments.this, NoQuestionActivity.class));
+                                finish();
+                            }
+                        } catch (JSONException exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
+
 
 
 }

@@ -127,9 +127,7 @@ public class QuizzActivity extends AppCompatActivity {
                     DisplayQuestion();
                 }
                 else {
-                    startActivity(new Intent(QuizzActivity.this, HomeScreenActivity.class));
-
-                    //TODO sendAnswer
+                    startActivity(new Intent(QuizzActivity.this, HomeScreenActivityFragments.class));
                     SendAnswer();
                 }
             }
