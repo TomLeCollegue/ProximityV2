@@ -112,7 +112,7 @@ public class UpdateQuestionActivity extends AppCompatActivity {
 
     public void deleteQuestion(String uuidQuestion){
         RequestQueue requestQueue =  Volley.newRequestQueue(getApplicationContext());
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/removeQuestion";
+        String URL = "http://"+ SessionManager.IPSERVER + "/questions/removeQuestion";
 
         JSONObject jsonBody = new JSONObject();
         try {
@@ -173,7 +173,7 @@ public class UpdateQuestionActivity extends AppCompatActivity {
 
     public void updateQuestion(String uuid, String questiontext, String choice1, String choice2, String choice3, String answer, String hobby, String uuidQuestion){
         RequestQueue requestQueue =  Volley.newRequestQueue(getApplicationContext());
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/ModifyQuestion";
+        String URL = "http://"+ SessionManager.IPSERVER + "/questions/ModifyQuestion";
 
         JSONObject jsonBody = new JSONObject();
         try {

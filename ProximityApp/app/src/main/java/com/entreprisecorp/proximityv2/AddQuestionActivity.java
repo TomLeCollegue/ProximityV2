@@ -122,7 +122,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     private void addQuestion(String uuid, String questiontext, String choice1, String choice2, String choice3, String answer, String hobby) {
 
         RequestQueue requestQueue =  Volley.newRequestQueue(getApplicationContext());
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/CreateQuestion";
+        String URL = "http://"+ SessionManager.IPSERVER + "/questions/CreateQuestion";
 
         JSONObject jsonBody = new JSONObject();
         try {
@@ -168,7 +168,7 @@ public class AddQuestionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/hobbies/GetAllHobbies";
+        String URL = "http://"+ SessionManager.IPSERVER + "/hobbies/GetAllHobbies";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {

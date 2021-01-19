@@ -86,7 +86,7 @@ public class FriendsListFragment extends Fragment implements AdapterProfilesFrie
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/Friends/getFriendsByUuid";
+        String URL = "http://"+ SessionManager.IPSERVER + "/Friends/getFriendsByUuid";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {

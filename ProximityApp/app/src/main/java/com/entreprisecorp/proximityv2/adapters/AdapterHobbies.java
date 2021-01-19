@@ -134,7 +134,7 @@ public class AdapterHobbies extends RecyclerView.Adapter<AdapterHobbies.MyViewHo
 
 
         public void downloadProfileImage(String name){
-            String urlDownload = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/images/" + name + "/downloadPicHobby";
+            String urlDownload = "http://"+ SessionManager.IPSERVER + "/images/" + name + "/downloadPicHobby";
             RequestQueue requestQueue = Volley.newRequestQueue(context);
             ImageRequest request = new ImageRequest(urlDownload, new Response.Listener<Bitmap>() {
                 @Override

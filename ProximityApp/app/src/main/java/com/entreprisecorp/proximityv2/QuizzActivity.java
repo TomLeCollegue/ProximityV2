@@ -220,7 +220,7 @@ public class QuizzActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/GetQuestionByEmail";
+        String URL = "http://"+ SessionManager.IPSERVER + "/questions/GetQuestionByEmail";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {
@@ -262,7 +262,7 @@ public class QuizzActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
     public void downloadProfileImage(String email){
-        String urlDownload = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/images/" + email + "/downloadLow";
+        String urlDownload = "http://"+ SessionManager.IPSERVER + "/images/" + email + "/downloadLow";
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         ImageRequest request = new ImageRequest(urlDownload, new Response.Listener<Bitmap>() {
             @Override
@@ -280,7 +280,7 @@ public class QuizzActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
     public void downloadHobbyImage(String name){
-        String urlDownload = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/images/" + name + "/downloadPicHobby";
+        String urlDownload = "http://"+ SessionManager.IPSERVER + "/images/" + name + "/downloadPicHobby";
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         ImageRequest request = new ImageRequest(urlDownload, new Response.Listener<Bitmap>() {
             @Override
@@ -356,7 +356,7 @@ public class QuizzActivity extends AppCompatActivity {
     private void SendAnswer() {
 
         RequestQueue requestQueue =  Volley.newRequestQueue(getApplicationContext());
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/answerQuestions";
+        String URL = "http://"+ SessionManager.IPSERVER + "/questions/answerQuestions";
 
         Gson gson = new Gson();
         String jsonObjectString = gson.toJson(questionAnswers);
@@ -391,7 +391,7 @@ public class QuizzActivity extends AppCompatActivity {
 
     private void AcceptPerson(){
         RequestQueue requestQueue =  Volley.newRequestQueue(getApplicationContext());
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/Friends/AcceptPerson";
+        String URL = "http://"+ SessionManager.IPSERVER + "/Friends/AcceptPerson";
 
         JSONObject jsonBody = new JSONObject();
         try {

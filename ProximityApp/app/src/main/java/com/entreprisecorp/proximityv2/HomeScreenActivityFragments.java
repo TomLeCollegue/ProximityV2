@@ -166,7 +166,7 @@ public class HomeScreenActivityFragments extends AppCompatActivity implements Bo
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/Friends/getDiscoveredByUuid";
+        String URL = "http://"+ SessionManager.IPSERVER + "/Friends/getDiscoveredByUuid";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {
@@ -211,7 +211,7 @@ public class HomeScreenActivityFragments extends AppCompatActivity implements Bo
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/GetQuestionByUuid";
+        String URL = "http://"+ SessionManager.IPSERVER + "/questions/GetQuestionByUuid";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {

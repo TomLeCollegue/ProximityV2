@@ -108,7 +108,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void signUp(String name, String surname, int age, String email, String password) {
 
         RequestQueue requestQueue =  Volley.newRequestQueue(getApplicationContext());
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/account/signUP";
+        String URL = "http://"+ SessionManager.IPSERVER + "/account/signUP";
 
         JSONObject jsonBody = new JSONObject();
         try {
@@ -163,7 +163,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void addProfileImage(String mail, byte[] profileImage ) {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        String URL = "http://" + SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/images/" + mail + "/upload";
+        String URL = "http://" + SessionManager.IPSERVER + "/images/" + mail + "/upload";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {

@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     public void Connection(String email, String password) {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/account/signIn";
+        String URL = "http://"+ SessionManager.IPSERVER + "/account/signIn";
 
         JSONObject jsonBody = new JSONObject();
         try {

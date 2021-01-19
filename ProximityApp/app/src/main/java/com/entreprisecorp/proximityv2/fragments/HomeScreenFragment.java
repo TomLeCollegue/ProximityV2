@@ -140,7 +140,7 @@ public class HomeScreenFragment extends Fragment {
     // ***** Download and display Image Profile **** //
     public void downloadProfileImage(String email){
 
-        String urlDownload = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/images/" + email + "/download";
+        String urlDownload = "http://"+ SessionManager.IPSERVER + "/images/" + email + "/download";
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         ImageRequest request = new ImageRequest(urlDownload, new Response.Listener<Bitmap>() {

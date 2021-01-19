@@ -128,7 +128,7 @@ public class FriendActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/getResultQuizz";
+        String URL = "http://"+ SessionManager.IPSERVER + "/questions/getResultQuizz";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {
@@ -165,7 +165,7 @@ public class FriendActivity extends AppCompatActivity {
 
 
     public void downloadProfileImage(String email){
-        String urlDownload = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/images/" + email + "/downloadLow";
+        String urlDownload = "http://"+ SessionManager.IPSERVER + "/images/" + email + "/downloadLow";
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         ImageRequest request = new ImageRequest(urlDownload, new Response.Listener<Bitmap>() {
             @Override

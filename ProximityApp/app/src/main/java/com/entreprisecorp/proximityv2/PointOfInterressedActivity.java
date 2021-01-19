@@ -128,7 +128,7 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/hobbies/GetHobbyByUuid";
+        String URL = "http://"+ SessionManager.IPSERVER + "/hobbies/GetHobbyByUuid";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {
@@ -185,7 +185,7 @@ public class PointOfInterressedActivity extends AppCompatActivity implements Ada
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/questions/GetQuestionByUuid";
+        String URL = "http://"+ SessionManager.IPSERVER + "/questions/GetQuestionByUuid";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {

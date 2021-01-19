@@ -121,7 +121,7 @@ public class DiscoveryActivity extends AppCompatActivity {
     // ***** Download and display Image Profile **** //
     public void downloadProfileImage(String email){
 
-        String urlDownload = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/images/" + email + "/download";
+        String urlDownload = "http://"+ SessionManager.IPSERVER + "/images/" + email + "/download";
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         ImageRequest request = new ImageRequest(urlDownload, new Response.Listener<Bitmap>() {
@@ -153,7 +153,7 @@ public class DiscoveryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/nearby/RefusePerson";
+        String URL = "http://"+ SessionManager.IPSERVER + "/nearby/RefusePerson";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {
@@ -192,7 +192,7 @@ public class DiscoveryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/similarity/GetHobbyInCommun";
+        String URL = "http://"+ SessionManager.IPSERVER + "/similarity/GetHobbyInCommun";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {
@@ -240,7 +240,7 @@ public class DiscoveryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = "http://"+ SessionManager.IPSERVER + "/RestFullTEST-1.0-SNAPSHOT/similarity/GetFriendsInCommon";
+        String URL = "http://"+ SessionManager.IPSERVER + "/similarity/GetFriendsInCommon";
         // Enter the correct url for your api service site
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
                 new Response.Listener<JSONObject>() {
